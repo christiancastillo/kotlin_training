@@ -1,0 +1,2 @@
+rootProject.name = "Vales Almacen J16"
+include ':app'
