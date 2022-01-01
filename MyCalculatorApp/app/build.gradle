@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
     defaultConfig {
         configurations.all {
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
         applicationId "com.android.training.mycalculatorapp"
         minSdk 19
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
