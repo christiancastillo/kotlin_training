@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         val buttonMinus: Button = findViewById<Button>(R.id.buttonMinus)
         val buttonStar: Button = findViewById<Button>(R.id.buttonStar)
         val buttonPlus: Button = findViewById<Button>(R.id.buttonPlus)
+        val buttonNeg: Button = findViewById<Button>(R.id.buttonNegative)
 
         val listener = View.OnClickListener { value -> //lambda?
             val b = value as Button
@@ -88,6 +89,23 @@ class MainActivity : AppCompatActivity() {
         buttonStar.setOnClickListener(opListener)
         buttonMinus.setOnClickListener(opListener)
         buttonEquals.setOnClickListener(opListener)
+
+        buttonNeg.setOnClickListener { view ->
+            val value: String = newNumber.getText().toString()
+            if (value.isEmpty()) {
+                newNumber.setText("-")
+            } else {
+                try{
+                    var doubleValue:Double = value.toDouble()
+                    doubleValue *= -1
+                    newNumber.setText(doubleValue.toString())
+
+                } catch(exc: NumberFormatException){
+                    newNumber.setText("")
+                }
+            }
+
+        }
     }
 
     private fun performOperation(value: Double, operation: String){
@@ -132,7 +150,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (operand1 != null){
-            outState?.putDouble(STATE_OPERAND1,operand1!!) //safe call operator: ?
+            outState.putDouble(STATE_OPERAND1,operand1!!) //safe call operator: ?
             outState.putBoolean(STATE_OPERAND1_STORE,true)
         }
         outState.putString(STATE_PENDING_OPERATION,pendingOperation)

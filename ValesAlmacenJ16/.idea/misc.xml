@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/usuario/Documents/GitHub/kotlin_training/ValesAlmacenJ16/app/src/main/res/layout/activity_main.xml" value="0.67" />
+        <entry key="..\:/Users/usuario/Documents/GitHub/kotlin_training/ValesAlmacenJ16/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/usuario/Documents/GitHub/kotlin_training/ValesAlmacenJ16/app/src/main/res/layout/activity_search_medicine.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/usuario/Documents/GitHub/kotlin_training/ValesAlmacenJ16/app/src/main/res/layout/activity_search_medicine_list.xml" value="0.1" />
       </map>
     </option>
   </component>
