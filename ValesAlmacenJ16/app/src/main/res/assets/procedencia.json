@@ -1,0 +1,16 @@
+{
+  "procedencia": [{
+      "id": "1",
+      "descr": "Almacen Estatal"
+    },{
+      "id": "2",
+      "descr":"Jurisdicción Sanitaria"
+    },{
+      "id": "3",
+      "descr": "Almacén Jurisdiccional"
+    },{
+      "id": "4",
+      "descr": "Otro"
+    }
+  ]
+}

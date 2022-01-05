@@ -110,7 +110,7 @@
         app:layout_constraintStart_toEndOf="@+id/textViewFecha" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextDestino"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -134,7 +134,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewDestino" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextClave"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -152,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:drawableLeft="@android:drawable/ic_menu_search"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextClave"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -170,15 +170,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="92dp"
         android:text="Presentacion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/editTextDescripcion"
         android:layout_width="0dp"
         android:layout_height="155dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Ej: Paracetamol tabletas, tableta de 500 mg."
@@ -187,6 +188,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/editTextPresentacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Ej: Envase con 40 tabletas."
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewPresentacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewPresentacion" />
+
+    <TextView
+        android:id="@+id/textViewCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:hint="Ej: 100"
+        android:text="Cantidad:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPresentacion" />
+
+    <EditText
+        android:id="@+id/editTextQty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewCantidad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewCantidad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
