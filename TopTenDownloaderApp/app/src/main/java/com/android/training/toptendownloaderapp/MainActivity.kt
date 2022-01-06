@@ -19,12 +19,13 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+        //var binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         //setContentView(binding.getRoot())
         setContentView(R.layout.activity_main)
         Log.d(TAG, "onCreate called!")
         val downloadData = DownloadData()
+        downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml")
         Log.d(TAG, "onCreate: done")
     }
 
@@ -68,11 +69,13 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG,"downloadXML: Received ${xmlResult.length} bytes")
                     return xmlResult.toString()
                 } catch (e: MalformedURLException){
-                    Log.e(TAG,"downloadXML: Error, ${e.message}")
+                    Log.e(TAG,"downloadXML: Error Invalid URL, ${e.message}")
                 } catch (e: IOException){
-                    Log.e(TAG,"downloadXML: Error, ${e.message}")
+                    Log.e(TAG,"downloadXML: Error, IOException: ${e.message}")
+                } catch(e: SecurityException){
+                    Log.e(TAG,"downloadXML: Error, SecurityException ${e.message}")
                 } catch(e: Exception){
-                    Log.e(TAG,"downloadXML: Error, ${e.message}")
+                    Log.e(TAG,"downloadXML: Error, Unknown error: ${e.message}")
                 }
                 return "" //if it gets here, there's been a problem, Return an empty string
             }
