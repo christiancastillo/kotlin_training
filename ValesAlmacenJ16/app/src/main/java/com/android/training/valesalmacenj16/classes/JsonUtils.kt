@@ -12,7 +12,6 @@ class JsonUtils {
 
     fun getData(){
 
-        var stringRequest: StringRequest = StringRequest(Config.DATA)
     }
 
 

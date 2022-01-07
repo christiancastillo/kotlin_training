@@ -220,10 +220,43 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="Ej: 12"
         android:inputType="numberSigned"
         app:layout_constraintBaseline_toBaselineOf="@+id/textViewCantidad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewCantidad" />
+
+    <TextView
+        android:id="@+id/textViewLote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:text="Lote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCantidad" />
+
+    <CheckBox
+        android:id="@+id/checkBoxLote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Sin lote"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextLote"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextLote"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Ej: BMXY025"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewLote"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxLote"
+        app:layout_constraintStart_toEndOf="@+id/textViewLote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
