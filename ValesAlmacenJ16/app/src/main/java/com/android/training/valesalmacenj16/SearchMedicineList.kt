@@ -12,6 +12,7 @@ class SearchMedicineList : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivitySearchMedicineListBinding.inflate(layoutInflater)
         //setContentView(R.layout.activity_search_medicine_list)
         setContentView(binding.getRoot())
         //val arregloJSON = arrayOf("Paracetamol", "Ibuprofeno", "Naproxeno")

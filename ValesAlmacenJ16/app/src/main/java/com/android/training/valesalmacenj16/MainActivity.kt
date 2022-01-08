@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(){
                 startActivity(searchMedicineListActivity)
             }
         } catch (e: Exception){
-            Log.d("ERROR main activity: ","Error: " + e.message)
+            Log.e("ERROR main activity: ","Error: " + e.message)
                 //Toast.makeText(this, "Error: " + e.message, Toast.LENGTH_LONG).show()
             }
             //Toast.makeText(this,"Error: "+e.message,Toast.LENGTH_LONG).show()
