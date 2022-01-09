@@ -6,268 +6,310 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_scrollFlags="scroll"
-    tools:context=".MainActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll"
+        tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextFolio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:hint="Ej: 0001"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewFolio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewFolio" />
+        <EditText
+            android:id="@+id/editTextFolio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:hint="Ej: 0001"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewFolio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textViewFolio" />
 
-    <TextView
-        android:id="@+id/textViewFolio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="Folio"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewSSHLogo" />
+        <TextView
+            android:id="@+id/textViewFolio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="Folio"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewSSHLogo" />
 
-    <ImageView
-        android:id="@+id/imageViewSSHLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ssh_logo" />
+        <ImageView
+            android:id="@+id/imageViewSSHLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ssh_logo" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:text="Jurisdiccion Sanitaria 16 Jacala"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewSSHLogo"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:text="Jurisdiccion Sanitaria 16 Jacala"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewSSHLogo"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:text="Generador de vales (PDF) rapidos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewSSHLogo"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
+            android:text="Generador de vales (PDF) rapidos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewSSHLogo"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <TextView
-        android:id="@+id/textViewDestino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="Destino"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFecha" />
+        <TextView
+            android:id="@+id/textViewDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Destino"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFecha" />
 
-    <TextView
-        android:id="@+id/textViewFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="Fecha"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFolio" />
+        <TextView
+            android:id="@+id/textViewFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Fecha"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFolio" />
 
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Ej: 20/02/2022"
-        android:inputType="date"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewFecha"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewFecha" />
+        <EditText
+            android:id="@+id/editTextDateFechaSalida"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Ej: 20/02/2022"
+            android:inputType="date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewFecha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textViewFecha" />
 
-    <EditText
-        android:id="@+id/editTextDestino"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Ej: C.S. Jesús del Rosal"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewDestino"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewDestino" />
+        <EditText
+            android:id="@+id/editTextDestino"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Ej: C.S. Jesús del Rosal"
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewDestino"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewDestino" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="Clave"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDestino" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Clave"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDestino" />
 
-    <EditText
-        android:id="@+id/editTextClave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Ej: 010.0104.0000"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSearch"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        <EditText
+            android:id="@+id/editTextClave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Ej: 010.0104.0000"
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSearch"
+            app:layout_constraintStart_toEndOf="@+id/textView3" />
 
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextClave"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextClave"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="88dp"
-        android:text="Descripcion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="88dp"
+            android:text="Descripcion"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <TextView
-        android:id="@+id/textViewPresentacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="92dp"
-        android:text="Presentacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        <TextView
+            android:id="@+id/textViewPresentacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="92dp"
+            android:text="Presentacion"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <EditText
-        android:id="@+id/editTextDescripcion"
-        android:layout_width="0dp"
-        android:layout_height="155dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Ej: Paracetamol tabletas, tableta de 500 mg."
-        android:inputType="textMultiLine|textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        <EditText
+            android:id="@+id/editTextDescripcion"
+            android:layout_width="0dp"
+            android:layout_height="155dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Ej: Paracetamol tabletas, tableta de 500 mg."
+            android:inputType="textMultiLine|textPersonName"
+            android:scrollbars="vertical"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView2" />
 
-    <EditText
-        android:id="@+id/editTextPresentacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Ej: Envase con 40 tabletas."
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewPresentacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewPresentacion" />
+        <EditText
+            android:id="@+id/editTextPresentacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Ej: Envase con 40 tabletas."
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewPresentacion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewPresentacion" />
 
-    <TextView
-        android:id="@+id/textViewCantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:hint="Ej: 100"
-        android:text="Cantidad:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPresentacion" />
+        <TextView
+            android:id="@+id/textViewCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:hint="Ej: 100"
+            android:text="Cantidad:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPresentacion" />
 
-    <EditText
-        android:id="@+id/editTextQty"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Ej: 12"
-        android:inputType="numberSigned"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewCantidad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewCantidad" />
+        <EditText
+            android:id="@+id/editTextQty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Ej: 12"
+            android:inputType="numberSigned"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewCantidad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewCantidad" />
 
-    <TextView
-        android:id="@+id/textViewLote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
-        android:text="Lote"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCantidad" />
+        <TextView
+            android:id="@+id/textViewLote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="44dp"
+            android:text="Lote"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCantidad" />
 
-    <CheckBox
-        android:id="@+id/checkBoxLote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Sin lote"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextLote"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <CheckBox
+            android:id="@+id/checkBoxLote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Sin lote"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextLote"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextLote"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Ej: BMXY025"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewLote"
-        app:layout_constraintEnd_toStartOf="@+id/checkBoxLote"
-        app:layout_constraintStart_toEndOf="@+id/textViewLote" />
+        <EditText
+            android:id="@+id/editTextLote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Ej: BMXY025"
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewLote"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxLote"
+            app:layout_constraintStart_toEndOf="@+id/textViewLote" />
 
-    <Button
-        android:id="@+id/buttonGuardar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Guardar"
-        app:icon="@android:drawable/ic_menu_save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxLote" />
+        <Button
+            android:id="@+id/buttonGuardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Guardar"
+            app:icon="@android:drawable/ic_menu_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxSincad"
+            app:layout_constraintVertical_bias="0.0" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="Caducidad"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLote" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSincad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="No Caduca"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextDateCad"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextDateCad"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Ej: 01/07/2027"
+            android:inputType="date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxSincad"
+            app:layout_constraintStart_toEndOf="@+id/textView8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

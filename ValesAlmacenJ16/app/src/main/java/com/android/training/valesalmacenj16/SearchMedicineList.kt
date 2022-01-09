@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 
 class SearchMedicineList : AppCompatActivity() {
-    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var adapter: ArrayAdapter<Any>
     private lateinit var binding: ActivitySearchMedicineListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,8 +15,8 @@ class SearchMedicineList : AppCompatActivity() {
         binding = ActivitySearchMedicineListBinding.inflate(layoutInflater)
         //setContentView(R.layout.activity_search_medicine_list)
         setContentView(binding.getRoot())
-        //val arregloJSON = arrayOf("Paracetamol", "Ibuprofeno", "Naproxeno")
-        //adapter = ArrayAdapter(this, binding.autoCompleteTextView.getId()!!,arregloJSON)
-        //binding.autoCompleteTextView.setAdapter(adapter)
+        val arregloJSON = arrayOf("Paracetamol", "Ibuprofeno", "Naproxeno")
+        adapter = ArrayAdapter(this, R.layout.activity_search_medicine_list, arregloJSON)
+        binding.autoCompleteTextView.setAdapter(adapter)
     }
 }
