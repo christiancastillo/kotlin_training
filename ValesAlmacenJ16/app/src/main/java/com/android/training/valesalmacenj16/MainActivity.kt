@@ -39,11 +39,12 @@ class MainActivity : AppCompatActivity(){
 
             //Se crea un arrayadapter para el spinner
             //mas informacion: https://developer.android.com/guide/topics/ui/controls/spinner
-            ArrayAdapter.createFromResource(this,R.array.Procedencia,R.layout.activity_main).also{
+
+            /*ArrayAdapter.createFromResource(this,R.array.Procedencia,R.layout.activity_main).also{
                     adapter ->
                 adapter.setDropDownViewResource(R.layout.activity_main)
                 spinProc.adapter = adapter
-            }
+            }*/
         //    binding.textView.setText("LLAMADA DESDE BINDING")
             buttonSearch.setOnClickListener {
                 val searchMedicineListActivity = Intent(
