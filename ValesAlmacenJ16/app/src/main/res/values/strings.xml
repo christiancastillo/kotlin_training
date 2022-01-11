@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Vales Almacen J16</string>
+
+    <string-array name="Procedencia">
+        <item>Almacen Estatal</item>
+        <item>Jurisdiccion Sanitaria</item>
+        <item>Centro de Salud</item>
+        <item>Otra area</item>
+    </string-array>
+
+    <string-array name="ClavesMedicamentos">
+        <item>010.000.5943.00</item>
+    </string-array>
+
+    <string-array name="DescripcionMedicamentos">
+        <item>Ibuprofeno suspension oral. cada 100 ml. contienen: ibuprofeno 2 g.</item>
+    </string-array>
+
+    <string-array name="PresentacionMedicamentos">
+        <item>Envase con 120 ml. y medida dosificadora.</item>
+    </string-array>
 </resources>

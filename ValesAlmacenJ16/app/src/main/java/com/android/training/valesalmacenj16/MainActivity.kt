@@ -7,10 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.CheckBox
-import android.widget.Toast
+import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 
@@ -21,7 +18,9 @@ class MainActivity : AppCompatActivity(){
     private lateinit var etDateCad : EditText
     private lateinit var editTextLote : EditText
     private lateinit var checkNoCaduca :  CheckBox
-    private lateinit var  checkSinLote : CheckBox
+    private lateinit var checkSinLote : CheckBox
+    private lateinit var listaProcedencia : ArrayAdapter<String>
+    private lateinit var spinProc : Spinner
     //private lateinit var binding: ActivitySearchMedicineListBinding //el binding debe ser basado en el nombre del activity!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +35,15 @@ class MainActivity : AppCompatActivity(){
             checkSinLote = findViewById(R.id.checkBoxLote)
             editTextNC = findViewById(R.id.editTextDateCad)
             editTextLote = findViewById(R.id.editTextLote)
+            spinProc = findViewById(R.id.spinnerProcedencia)
 
+            //Se crea un arrayadapter para el spinner
+            //mas informacion: https://developer.android.com/guide/topics/ui/controls/spinner
+            ArrayAdapter.createFromResource(this,R.array.Procedencia,R.layout.activity_main).also{
+                    adapter ->
+                adapter.setDropDownViewResource(R.layout.activity_main)
+                spinProc.adapter = adapter
+            }
         //    binding.textView.setText("LLAMADA DESDE BINDING")
             buttonSearch.setOnClickListener {
                 val searchMedicineListActivity = Intent(

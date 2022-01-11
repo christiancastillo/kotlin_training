@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 
 class SearchMedicineList : AppCompatActivity() {
-    private lateinit var adapter: ArrayAdapter<Any>
+    private lateinit var adapter: ArrayAdapter<String>
     private lateinit var binding: ActivitySearchMedicineListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
