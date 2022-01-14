@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(){
             }
 
             editTextDateFSalida.setOnClickListener{
-                showDatePicker()
+                showDatePicker(editTextDateFSalida)
             }
 
             checkSinLote.setOnClickListener{
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(){
             }
 
             etDateCad.setOnClickListener {
-                showDatePicker()
+                showDatePicker(etDateCad)
             }
         } catch (e: Exception){
             Log.e("ERROR main activity: ","Error: " + e.message)
@@ -83,14 +83,14 @@ class MainActivity : AppCompatActivity(){
         }
 
     //Funcion para datePicker
-    private fun showDatePicker(){
-        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year)}
+    private fun showDatePicker(et: EditText){
+        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year,et)}
         datePicker.show(supportFragmentManager,"datePicker")
         //ed.setText(fecha)
     }
 
-    private fun onDateSelected(day: Int, month: Int, year: Int){
+    private fun onDateSelected(day: Int, month: Int, year: Int,et: EditText){
         val fecha = "${day}/${month+1}/${year}"
-        editTextDateFSalida.setText(fecha)
+        et.setText(fecha)
     }
     }
