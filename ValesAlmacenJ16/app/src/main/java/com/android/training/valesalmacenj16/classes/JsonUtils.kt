@@ -1,17 +1,22 @@
 package com.android.training.valesalmacenj16.classes
 
-import com.android.volley.toolbox.StringRequest
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-import java.util.ArrayList
+import android.content.Context
+import java.io.IOException
 
 
 class JsonUtils {
-    lateinit var j : JSONObject
 
-    fun getData(){
-
+    fun getJsonDataFromAssets(context: Context, fileName : String):String?{
+        val jsonString: String
+        try{
+            jsonString = context.assets.open(fileName).bufferedReader().use {
+                it.readText()
+            }
+        } catch(ioException : IOException){
+            ioException.printStackTrace()
+            return null
+        }
+        return jsonString
     }
 
 
