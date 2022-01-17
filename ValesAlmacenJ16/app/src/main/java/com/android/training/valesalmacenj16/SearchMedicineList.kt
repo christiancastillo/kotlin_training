@@ -43,11 +43,11 @@ class SearchMedicineList : AppCompatActivity() {
                 arrayPresentacion = listOf(medicamentos[i].presentacion)
                 arrayClave = listOf(medicamentos[i].clave)
 
-                if (arrayDescripcion[i] == binding.aCTVDescripcion.getText().toString()){
-                    binding.textViewClaveJSON.setText(arrayClave[i])
-                    binding.textViewPresentacionJSON.setText(arrayPresentacion[i])
-                    break
-                }
+//                if (arrayDescripcion[i] == binding.aCTVDescripcion.getText().toString()){
+//                    binding.textViewClaveJSON.setText(arrayClave[i])
+//                    binding.textViewPresentacionJSON.setText(arrayPresentacion[i])
+//                    break
+//                }
                 Log.i(TAG,"******************************************************")
                 Log.i(TAG,"valor de i: ${i}, descripcion: ${medicamentos[i].descr}, presentacion: ${medicamentos[i].presentacion}, clave: ${medicamentos[i].clave}")
                 Log.i(TAG,"******************************************************")
@@ -57,6 +57,7 @@ class SearchMedicineList : AppCompatActivity() {
             //TODO: Implementar método para convertir de un JSON a un objeto de la clase y también alimentar un arreglo
 
             adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayDescripcion)
+            Log.i(TAG,arrayDescripcion[0])
             binding.aCTVDescripcion.setThreshold(1) //empieza a trabajar desde el primer caracter
             binding.aCTVDescripcion.setAdapter(adapter)
         } catch(e: Exception){
