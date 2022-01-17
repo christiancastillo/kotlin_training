@@ -24,11 +24,10 @@ class SearchMedicineList : AppCompatActivity() {
             setContentView(binding.getRoot())
             var utilsJSON = JsonUtils()
             val jsonFileString = utilsJSON.getJsonDataFromAssets(getApplicationContext(),"medicamentos.json")
-            Log.i("data in json: ",jsonFileString!!)
             val gson = Gson()
             val listMedicamentosType = object : TypeToken<List<MedicamentosModel>>(){}.getType()
             val medicamentos: List<MedicamentosModel> = gson.fromJson(jsonFileString,listMedicamentosType)
-            Log.i(TAG,"DATOS DEL JSON***************")
+            Log.i(TAG,"******************************DATOS DEL JSON******************************")
             Log.i(TAG, medicamentos[0].presentacion)
             Log.i(TAG, medicamentos[0].clave)
             Log.i(TAG, medicamentos[0].descr)
@@ -39,17 +38,27 @@ class SearchMedicineList : AppCompatActivity() {
             var i : Int = 0
             while(i < medicamentos.size){
                 Log.i(TAG,"medicamentos.size: ${medicamentos.size}")
+                Log.i(TAG, "valor de i: ${i}")
                 arrayDescripcion = listOf(medicamentos[i].descr)
                 arrayPresentacion = listOf(medicamentos[i].presentacion)
                 arrayClave = listOf(medicamentos[i].clave)
+
+                if (arrayDescripcion[i] == binding.aCTVDescripcion.getText().toString()){
+                    binding.textViewClaveJSON.setText(arrayClave[i])
+                    binding.textViewPresentacionJSON.setText(arrayPresentacion[i])
+                    break
+                }
+                Log.i(TAG,"******************************************************")
+                Log.i(TAG,"valor de i: ${i}, descripcion: ${medicamentos[i].descr}, presentacion: ${medicamentos[i].presentacion}, clave: ${medicamentos[i].clave}")
+                Log.i(TAG,"******************************************************")
                 i++
             }
 
             //TODO: Implementar método para convertir de un JSON a un objeto de la clase y también alimentar un arreglo
-            val arregloJSON = arrayOf("Paracetamol", "Ibuprofeno", "Naproxeno")
+
             adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayDescripcion)
-            binding.autoCompleteTextView.setThreshold(1) //empieza a trabajar desde el primer caracter
-            binding.autoCompleteTextView.setAdapter(adapter)
+            binding.aCTVDescripcion.setThreshold(1) //empieza a trabajar desde el primer caracter
+            binding.aCTVDescripcion.setAdapter(adapter)
         } catch(e: Exception){
             Log.e("ONCREATE MEDTHOD:","********************************************")
             e.printStackTrace()

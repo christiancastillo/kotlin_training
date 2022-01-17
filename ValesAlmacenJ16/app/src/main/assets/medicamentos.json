@@ -1,16 +1,37 @@
 [
   {
-    "id": "1",
+    "id": "0",
     "clave": "2101-00043",
     "descr": "Cinta Masking - tape. 24 mm. x 50 mts.",
     "presentacion": "Pieza.",
     "tipo": "Papeleria"
   },
   {
-    "id": "2",
-    "clave": "010.1234.00",
+    "id": "1",
+    "clave": "010.000.0104.00",
     "descr": "Paracetamol 500 mg, tabletas.",
     "presentacion": "Caja con 30 tabletas.",
+    "tipo": "Medicamento"
+  },
+  {
+  "id": "2",
+  "clave": "2101-00063",
+  "descr": "Colores Madera.",
+  "presentacion": "Caja con 24 piezas.",
+  "tipo": "Papeleria"
+  },
+  {
+    "id": "3",
+    "clave": "010.000.0105.00",
+    "descr": "Colores Madera.",
+    "presentacion": "Caja con 24 piezas.",
+    "tipo": "Papeleria"
+  },
+  {
+    "id": "4",
+    "clave": "010.000.0105.00",
+    "descr": "Paracetamol Supositorio 300 mg.",
+    "presentacion": "Caja con 3 supositorios.",
     "tipo": "Medicamento"
   }
 ]
