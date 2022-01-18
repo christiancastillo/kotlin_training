@@ -8,7 +8,9 @@ import android.text.method.KeyListener
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.training.valesalmacenj16.classes.MedicamentosModel
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 import com.android.training.valesalmacenj16.classes.JsonUtils
@@ -41,6 +43,7 @@ class SearchMedicineList : AppCompatActivity() {
             var descripcion: String
             var i : Int = 0
             var posicion : Int = 0
+            lateinit var adapterRecycler : MyAdapter
 
             while(i < medicamentos.size){
                 arrayIds.add(medicamentos[i].id.toString())
@@ -64,6 +67,18 @@ class SearchMedicineList : AppCompatActivity() {
                     j++
                 }
             }
+
+            //TODO: Queda pendiente hacer el adapter recycler para que funcione con el RecyclerView
+            //liga de interés: https://handyopinion.com/basic-recyclerview-custom-adapter-in-kotlin-android/
+            //https://handyopinion.com/how-to-show-vertical-list-in-kotlin-using-recyclerview-example/
+            var myArrayList = ArrayList<String>()
+            myArrayList.add("10")
+            myArrayList.add("20")
+            adapterRecycler = MyAdapter(this,myArrayList)
+            binding.recyclerViewMedicamentosLista.setLayoutManager(LinearLayoutManager(this))
+            binding.recyclerViewMedicamentosLista.setAdapter(adapterRecycler)
+
+
 
             //binding.textViewPresentacionJSON.setText(descPresentacion)
             //binding.textViewClaveJSON.setText(descClave)
