@@ -1,11 +1,13 @@
 package com.android.training.valesalmacenj16
 
+import android.R
 import android.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.KeyListener
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.android.training.valesalmacenj16.classes.MedicamentosModel
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 import com.android.training.valesalmacenj16.classes.JsonUtils
@@ -27,44 +29,45 @@ class SearchMedicineList : AppCompatActivity() {
             val gson = Gson()
             val listMedicamentosType = object : TypeToken<List<MedicamentosModel>>(){}.getType()
             val medicamentos: List<MedicamentosModel> = gson.fromJson(jsonFileString,listMedicamentosType)
-            var arrayDescripcion : List<String> = listOf()
-            var arrayPresentacion: List<String> = listOf()
-            var arrayClave : List<String> = listOf()
+            var arrayDescripcion = mutableListOf("")
+            var arrayPresentacion = mutableListOf("")
+            var arrayClave = mutableListOf("")
+            var arrayIds = mutableListOf("")
+            var presentacion : String
+            var clave : String
+            var descripcion: String
             var i : Int = 0
-            var descString : String = ""
-            var descPresentacion: String = ""
-            var descClave : String = ""
+            var posicion : Int = 0
 
             while(i < medicamentos.size){
-                arrayDescripcion = listOf(medicamentos[i].descr)
-                arrayPresentacion  = listOf(medicamentos[i].presentacion)
-                arrayClave = listOf(medicamentos[i].clave)
-
-                Log.i(TAG,"Info: ${binding.aCTVDescripcion.getText().toString()}")
-                if (arrayDescripcion[i].contains(binding.aCTVDescripcion.getText().toString())){
-                    descClave = arrayClave[i]
-                    descPresentacion = arrayPresentacion[i]
-                    break
-                }
-                Log.i(TAG,"******************************************************")
-                Log.i(TAG,"valor de i: ${i}, descripcion: ${medicamentos[i].descr}, presentacion: ${medicamentos[i].presentacion}, clave: ${medicamentos[i].clave}")
-                Log.i(TAG,"******************************************************")
+                arrayIds.add(medicamentos[i].id.toString())
+                arrayDescripcion.add(medicamentos[i].descr)
+                arrayPresentacion.add(medicamentos[i].presentacion)
+                arrayClave.add(medicamentos[i].clave)
                 i++
             }
-            adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayDescripcion)
+            adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayDescripcion.toTypedArray())
             binding.aCTVDescripcion.setThreshold(1) //empieza a trabajar desde el primer caracter
             binding.aCTVDescripcion.setAdapter(adapter)
-            binding.aCTVDescripcion.setText(binding.aCTVDescripcion.getAdapter().getItem(0).toString());
             binding.aCTVDescripcion.setOnItemClickListener { parent, view, position, id ->
-                //TODO: Falta implementar código para listener cuando se da click en item.
+                var j: Int = 0
+                while(j < medicamentos.size){
+                    if(parent.getItemAtPosition(position).toString().equals(medicamentos[j].descr)){
+                        binding.textViewClaveJSON.setText(medicamentos[j].clave)
+                        binding.textViewPresentacionJSON.setText(medicamentos[j].presentacion)
+                        break
+                    }
+                    j++
+                }
             }
 
             //binding.textViewPresentacionJSON.setText(descPresentacion)
             //binding.textViewClaveJSON.setText(descClave)
 
             //TODO: Implementar método para convertir de un JSON a un objeto de la clase y también alimentar un arreglo
+            //TODO: Implementar método para generar reporte en PDF y guardarlo en disco local (almacenamiento interno)
         } catch(e: Exception){
-            Log.e("ONCREATE MEDTHOD:","********************************************")
+            Log.e(TAG,"ERROR ******************************************** ERROR: ${e.message}\n")
             e.printStackTrace()
         }
     }
