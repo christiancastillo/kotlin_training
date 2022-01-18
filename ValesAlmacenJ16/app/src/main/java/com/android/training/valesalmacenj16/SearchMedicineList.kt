@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.text.method.KeyListener
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.BaseAdapter
 import android.widget.TextView
 import com.android.training.valesalmacenj16.classes.MedicamentosModel
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 import com.android.training.valesalmacenj16.classes.JsonUtils
+import com.android.training.valesalmacenj16.classes.MyAdapter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -24,15 +26,16 @@ class SearchMedicineList : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             binding = ActivitySearchMedicineListBinding.inflate(layoutInflater)
             setContentView(binding.getRoot())
-            var utilsJSON = JsonUtils()
+            val utilsJSON = JsonUtils()
             val jsonFileString = utilsJSON.getJsonDataFromAssets(getApplicationContext(),"medicamentos.json")
             val gson = Gson()
             val listMedicamentosType = object : TypeToken<List<MedicamentosModel>>(){}.getType()
             val medicamentos: List<MedicamentosModel> = gson.fromJson(jsonFileString,listMedicamentosType)
-            var arrayDescripcion = mutableListOf("")
-            var arrayPresentacion = mutableListOf("")
-            var arrayClave = mutableListOf("")
-            var arrayIds = mutableListOf("")
+            val arrayDescripcion = mutableListOf("")
+            val arrayPresentacion = mutableListOf("")
+            val arrayClave = mutableListOf("")
+            val arrayIds = mutableListOf("")
+            //val adapterGridView = MyAdapter(this@SearchMedicineList,)
             var presentacion : String
             var clave : String
             var descripcion: String
@@ -46,6 +49,7 @@ class SearchMedicineList : AppCompatActivity() {
                 arrayClave.add(medicamentos[i].clave)
                 i++
             }
+
             adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayDescripcion.toTypedArray())
             binding.aCTVDescripcion.setThreshold(1) //empieza a trabajar desde el primer caracter
             binding.aCTVDescripcion.setAdapter(adapter)
