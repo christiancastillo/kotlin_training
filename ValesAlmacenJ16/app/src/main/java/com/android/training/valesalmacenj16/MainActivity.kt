@@ -15,7 +15,6 @@ import java.io.InputStreamReader
 class MainActivity : AppCompatActivity(){
     private lateinit var buttonSearch: Button
     private lateinit var editTextDateFSalida : EditText
-    private lateinit var editTextNC : EditText
     private lateinit var etDateCad : EditText
     private lateinit var editTextLote : EditText
     private lateinit var checkNoCaduca :  CheckBox
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity(){
             editTextDateFSalida = findViewById(R.id.editTextDateFechaSalida)
             checkNoCaduca = findViewById(R.id.checkBoxSincad)
             checkSinLote = findViewById(R.id.checkBoxLote)
-            editTextNC = findViewById(R.id.editTextDateCad)
             editTextLote = findViewById(R.id.editTextLote)
             spinProc = findViewById(R.id.spinnerProcedencia)
             etDateCad = findViewById(R.id.editTextDateCad)
@@ -49,6 +47,7 @@ class MainActivity : AppCompatActivity(){
 
         //    binding.textView.setText("LLAMADA DESDE BINDING")
             buttonSearch.setOnClickListener {
+                //cambia de actividad
                 val searchMedicineListActivity = Intent(
                     this, SearchMedicineList::class.java
                 ) //3: Definicion de variables e intents
@@ -69,9 +68,9 @@ class MainActivity : AppCompatActivity(){
 
             checkNoCaduca.setOnClickListener{
                 if (checkNoCaduca.isChecked()){
-                    editTextNC.setText("NO CADUCA")
+                    etDateCad.setText("NO CADUCA")
                 } else {
-                    editTextNC.setText("")
+                    etDateCad.setText("")
                 }
             }
 
