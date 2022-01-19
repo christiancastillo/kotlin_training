@@ -11,7 +11,6 @@ data class MedicamentosModel (
     @SerializedName("presentacion") val presentacion: String,
     @SerializedName("tipo") val tipo: String
         )
-
 /*
 * Ligas de interes:
 

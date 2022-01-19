@@ -2,21 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/descripcion_tv_grid"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="descripcion"
-        android:textSize="20dp"
-        android:padding="5dp"/>
-
-    <TextView
-        android:id="@+id/presentacion_tv_grid"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="1dp"
-        android:text="presentacion"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/descripcion_tv_grid"
+                android:layout_width="wrap_content"
+                android:paddingRight="30dp"
+                android:layout_height="wrap_content"
+                android:text="[DESCRIPCION]"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/clave_tv_grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[CLAVE]"
+                android:textSize="10sp"
+                android:paddingRight="30dp"/>
+
+            <TextView
+                android:id="@+id/presentacion_tv_grid"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[PRESENTACION]"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
