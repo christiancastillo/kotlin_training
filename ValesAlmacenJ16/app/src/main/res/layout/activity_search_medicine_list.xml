@@ -101,6 +101,5 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewClaveJSON"
             android:layout_marginTop="20dp"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -62,22 +62,22 @@ class SearchMedicineList : AppCompatActivity() {
                 }
             }
 
-            binding.buttonAgregarMedicamento.setOnClickListener{
-                if(binding.aCTVDescripcion.getText().toString().isEmpty()){
-                    AlertDialog.Builder(this).setTitle("Alerta").setMessage("Ingrese información valida.").setPositiveButton("OK",
-                        DialogInterface.OnClickListener { dialog, which ->  }).show()
-                } else {
-                    listaMedicamentos.add(binding.aCTVDescripcion.getText().toString())
+            //thread(true){
+                binding.buttonAgregarMedicamento.setOnClickListener{
+                    if(binding.aCTVDescripcion.getText().toString().isEmpty()){
+                        AlertDialog.Builder(this).setTitle("Alerta").setMessage("Ingrese información valida.").setPositiveButton("OK",
+                            DialogInterface.OnClickListener { dialog, which ->  }).show()
+                    } else {
+                        listaMedicamentos.add(binding.aCTVDescripcion.getText().toString())
+                    }
                 }
-            }
+           // }
 
             //TODO: Queda pendiente hacer el adapter recycler para que funcione con el RecyclerView
             //liga de interés: https://handyopinion.com/basic-recyclerview-custom-adapter-in-kotlin-android/
             //https://handyopinion.com/how-to-show-vertical-list-in-kotlin-using-recyclerview-example/
-            thread(true){
                 binding.recyclerViewMedicamentosLista.setLayoutManager(LinearLayoutManager(this))
-                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(this,listaMedicamentos))
-            }
+                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(this, listaMedicamentos))
 
             //TODO: Implementar método para generar reporte en PDF y guardarlo en disco local (almacenamiento interno)
         } catch(e: Exception){

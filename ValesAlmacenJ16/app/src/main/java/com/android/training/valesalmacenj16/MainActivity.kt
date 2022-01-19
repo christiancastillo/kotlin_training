@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var checkNoCaduca :  CheckBox
     private lateinit var checkSinLote : CheckBox
     private lateinit var spinProc : Spinner
+    private lateinit var fechaCal : String
     //private lateinit var binding: ActivitySearchMedicineListBinding //el binding debe ser basado en el nombre del activity!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity(){
             editTextNC = findViewById(R.id.editTextDateCad)
             editTextLote = findViewById(R.id.editTextLote)
             spinProc = findViewById(R.id.spinnerProcedencia)
+            etDateCad = findViewById(R.id.editTextDateCad)
 
             //Se crea un arrayadapter para el spinner
             //mas informacion: https://developer.android.com/guide/topics/ui/controls/spinner
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity(){
             }
 
             editTextDateFSalida.setOnClickListener{
-                showDatePicker(editTextDateFSalida)
+                showDatePicker()
             }
 
             checkSinLote.setOnClickListener{
@@ -74,7 +76,7 @@ class MainActivity : AppCompatActivity(){
             }
 
             etDateCad.setOnClickListener {
-                showDatePicker(etDateCad)
+                showDatePicker()
             }
         } catch (e: Exception){
             Log.e("ERROR main activity: ","Error: " + e.message)
@@ -83,14 +85,15 @@ class MainActivity : AppCompatActivity(){
         }
 
     //Funcion para datePicker
-    private fun showDatePicker(et: EditText){
-        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year,et)}
+    private fun showDatePicker(){
+        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year)}
         datePicker.show(supportFragmentManager,"datePicker")
         //ed.setText(fecha)
     }
 
-    private fun onDateSelected(day: Int, month: Int, year: Int,et: EditText){
-        val fecha = "${day}/${month+1}/${year}"
-        et.setText(fecha)
+    private fun onDateSelected(day: Int, month: Int, year: Int){
+        var fecha = "${day}/${month+1}/${year}"
+        etDateCad.setText(fecha)
+        editTextDateFSalida.setText(fecha)
     }
     }
