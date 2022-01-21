@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 //esta clase esta hecha siguiendo el JSON
 
 data class MedicamentosModel (
-    @SerializedName("id") val id: Int,
-    @SerializedName("clave") val clave: String,
-    @SerializedName("descr") val descr: String,
-    @SerializedName("presentacion") val presentacion: String,
-    @SerializedName("tipo") val tipo: String
+    @SerializedName("ID") val id: Int,
+    @SerializedName("CLAVE") val clave: String,
+    @SerializedName("DESCRIPCION") val descr: String,
+    @SerializedName("PRESENTACION") val presentacion: String
+//    @SerializedName("tipo") val tipo: String
         )
 /*
 * Ligas de interes:

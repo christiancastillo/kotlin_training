@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="100dp"
             android:text="Presentación"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -50,6 +50,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:hint="Ej: Ibuprofeno"
+            android:lines="5"
+            android:maxLines="7"
             android:minHeight="48dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView"
             app:layout_constraintEnd_toStartOf="@+id/buttonAgregarMedicamento"

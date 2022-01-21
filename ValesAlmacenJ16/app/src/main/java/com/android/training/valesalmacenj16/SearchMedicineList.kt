@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 
 import android.R.*
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineLi
 import com.android.training.valesalmacenj16.classes.JsonUtils
 import com.android.training.valesalmacenj16.classes.MyAdapter
 import com.android.training.valesalmacenj16.databinding.RowItemBinding
+import com.android.training.valesalmacenj16.classes.Parameters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlin.concurrent.thread
@@ -31,6 +33,7 @@ class SearchMedicineList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         try{
             super.onCreate(savedInstanceState)
+            setTitle("Busqueda de insumos")
             binding = ActivitySearchMedicineListBinding.inflate(layoutInflater)
             rowItem = RowItemBinding.inflate(layoutInflater)
             setContentView(binding.getRoot())
@@ -42,14 +45,12 @@ class SearchMedicineList : AppCompatActivity() {
             val arrayDescripcion = mutableListOf("")
             val arrayPresentacion = mutableListOf("")
             val arrayClave = mutableListOf("")
-            val listaMedicamentos = mutableListOf("")
-            val listaClaves = mutableListOf("")
-            val listaPresentaciones = mutableListOf("")
             //val adapterGridView = MyAdapter(this@SearchMedicineList,)
             var presentacion : String
             var clave : String
             var descripcion: String
             var i : Int = 0
+            val valores : Parameters = Parameters()
 
             while(i < medicamentos.size){
                 arrayDescripcion.add(medicamentos[i].descr)
@@ -82,28 +83,24 @@ class SearchMedicineList : AppCompatActivity() {
                             .setPositiveButton("OK",DialogInterface.OnClickListener{
                                 dialog, id ->
                                 val textTemp : TextView
-                                listaMedicamentos.add(binding.aCTVDescripcion.getText().toString())
-                                listaClaves.add(binding.textViewClaveJSON.getText().toString())
-                                listaPresentaciones.add(binding.textViewPresentacionJSON.getText().toString())
-                                binding.recyclerViewMedicamentosLista.setLayoutManager(LinearLayoutManager(this))
-                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.descripcionTvGrid,this, listaMedicamentos,rowItem.descripcionTvGrid.id))
-                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.presentacionTvGrid, this, listaPresentaciones,rowItem.presentacionTvGrid.id))
-                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.claveTvGrid, this, listaClaves,rowItem.claveTvGrid.id))
-                                MyAdapter(null,this, listaMedicamentos,null).notifyItemInserted(binding.recyclerViewMedicamentosLista.size)
+//                                binding.recyclerViewMedicamentosLista.setLayoutManager(LinearLayoutManager(this))
+//                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.descripcionTvGrid,this, listaMedicamentos,rowItem.descripcionTvGrid.id))
+//                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.presentacionTvGrid, this, listaPresentaciones,rowItem.presentacionTvGrid.id))
+//                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.claveTvGrid, this, listaClaves,rowItem.claveTvGrid.id))
+//                                MyAdapter(null,this, listaMedicamentos,null).notifyItemInserted(binding.recyclerViewMedicamentosLista.size)
+
+                                val mActivityIntent = Intent(this, MainActivity::class.java) //con esto regresará al main activity
+                                mActivityIntent.putExtra("descripcion",binding.aCTVDescripcion.getText().toString())
+                                mActivityIntent.putExtra("claveInsumo",binding.textViewClaveJSON.getText().toString())
+                                mActivityIntent.putExtra("presentacion",binding.textViewPresentacionJSON.getText().toString())
+                                startActivity(mActivityIntent)
+                                //finish() //termina la actividad
                             })
                             .setNegativeButton("Salir",DialogInterface.OnClickListener { dialog, which ->
                                 //no hace nada
                             }).show()
                     }
                 }
-           // }
-
-            //TODO: Queda pendiente hacer el adapter recycler para que funcione con el RecyclerView
-            //liga de interés: https://handyopinion.com/basic-recyclerview-custom-adapter-in-kotlin-android/
-            //https://handyopinion.com/how-to-show-vertical-list-in-kotlin-using-recyclerview-example/
-
-
-
             //TODO: Implementar método para generar reporte en PDF y guardarlo en disco local (almacenamiento interno)
         } catch(e: Exception){
             Log.e(TAG,"ERROR: ${e.message}\n")
