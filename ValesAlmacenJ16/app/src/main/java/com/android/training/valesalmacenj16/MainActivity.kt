@@ -147,4 +147,14 @@ class MainActivity : AppCompatActivity(){
         super.onSaveInstanceState(outState)
         outState.putString(TEXT_CONTENTS,editTextLote.getText().toString())
     }
+
+    override fun onResume() {
+        super.onResume()
+        editTextLote.setText("onresume")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        editTextLote.setText("onrestart")
+    }
 }
