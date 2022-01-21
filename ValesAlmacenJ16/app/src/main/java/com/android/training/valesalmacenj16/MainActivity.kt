@@ -3,6 +3,7 @@ package com.android.training.valesalmacenj16
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -11,6 +12,8 @@ import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 import java.io.InputStreamReader
+
+private const val TEXT_CONTENTS: String = ""
 
 class MainActivity : AppCompatActivity(){
     private lateinit var buttonSearch: Button
@@ -41,9 +44,12 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
             super.onCreate(savedInstanceState) //1
+
       //      val view: View = binding.getRoot() //llama al binding del activity
             setContentView(R.layout.activity_main)
             setTitle("Generador de vales PDF")//2
@@ -72,6 +78,7 @@ class MainActivity : AppCompatActivity(){
             arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             spinProc.setAdapter(arrayAdapter)
 
+            //editTextLote.setText(savedInstanceState!!.getString(TEXT_CONTENTS,""))
             etDescripcionMed.setText(descripcionMed)
             etClaveMed.setText(claveMed)
             etPresentacionMed.setText(presentacionMed)
@@ -82,6 +89,7 @@ class MainActivity : AppCompatActivity(){
         //    binding.textView.setText("LLAMADA DESDE BINDING")
             buttonSearch.setOnClickListener {
                 //cambia de actividad
+                Log.i("MAIN_ACTIVITY", "ENTRA A SET ON CLICKLISTENER")
                 val searchMedicineListActivity = Intent(
                     this, SearchMedicineList::class.java
                 ) //3: Definicion de variables e intents
@@ -129,4 +137,14 @@ class MainActivity : AppCompatActivity(){
         etDateCad.setText(fecha)
         editTextDateFSalida.setText(fecha)
     }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        editTextLote.setText(savedInstanceState.getString(TEXT_CONTENTS,""))
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(TEXT_CONTENTS,editTextLote.getText().toString())
+    }
+}
