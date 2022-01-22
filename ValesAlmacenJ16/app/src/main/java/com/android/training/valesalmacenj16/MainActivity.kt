@@ -10,6 +10,9 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.training.valesalmacenj16.classes.MyAdapter
 import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
 import java.io.InputStreamReader
 
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity(){
     private var presentacionMed : String? = ""
     private var claveMed : String? = ""
     private var descripcionMed : String? = ""
+    private lateinit var rvListaMeds : RecyclerView
 
 
     //private lateinit var binding: ActivitySearchMedicineListBinding //el binding debe ser basado en el nombre del activity!
@@ -49,7 +53,6 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
             super.onCreate(savedInstanceState) //1
-
       //      val view: View = binding.getRoot() //llama al binding del activity
             setContentView(R.layout.activity_main)
             setTitle("Generador de vales PDF")//2
@@ -57,7 +60,6 @@ class MainActivity : AppCompatActivity(){
             claveMed = intent.getStringExtra("claveInsumo")
             presentacionMed = intent.getStringExtra("presentacion")
             descripcionMed = intent.getStringExtra("descripcion")
-
             buttonSearch = findViewById(R.id.buttonSearch)
             editTextDateFSalida = findViewById(R.id.editTextDateFechaSalida)
             checkNoCaduca = findViewById(R.id.checkBoxSincad)
@@ -68,10 +70,16 @@ class MainActivity : AppCompatActivity(){
             etPresentacionMed = findViewById(R.id.editTextPresentacion)
             etClaveMed = findViewById(R.id.editTextClave)
             etDescripcionMed = findViewById(R.id.editTextDescripcion)
+            rvListaMeds = findViewById(R.id.recyclerview_medicamentos_lista)
+            val buttonGuardar : Button = findViewById(R.id.buttonGuardar)
 
-
-            //Se crea un arrayadapter para el spinner
-            //mas informacion: https://developer.android.com/guide/topics/ui/controls/spinner
+            buttonGuardar.setOnClickListener {
+                var arrayStrings : ArrayList<String> = ArrayList<String>()
+                arrayStrings.add(editTextLote.getText().toString())
+                arrayStrings.add(etDescripcionMed.getText().toString())
+                rvListaMeds.setLayoutManager(LinearLayoutManager(this))
+                rvListaMeds.setAdapter(MyAdapter(this,))
+            }
 
             var procedenciaStrings = arrayOf("Almacen Estatal", "Otra institución", "Jurisdicción", "Centro de Salud")
             val arrayAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,procedenciaStrings)
@@ -83,17 +91,12 @@ class MainActivity : AppCompatActivity(){
             etClaveMed.setText(claveMed)
             etPresentacionMed.setText(presentacionMed)
 
-
-
-
-        //    binding.textView.setText("LLAMADA DESDE BINDING")
             buttonSearch.setOnClickListener {
-                //cambia de actividad
                 Log.i("MAIN_ACTIVITY", "ENTRA A SET ON CLICKLISTENER")
                 val searchMedicineListActivity = Intent(
                     this, SearchMedicineList::class.java
-                ) //3: Definicion de variables e intents
-                startActivity(searchMedicineListActivity)
+                )
+                startActivity(searchMedicineListActivity) //cambia de actividad
             }
 
             editTextDateFSalida.setOnClickListener{

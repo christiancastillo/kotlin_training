@@ -94,7 +94,7 @@
 
         <!--GRIDVIEW para lista de medicamentos-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_medicamentos_lista"
+            android:id="@+id/recycler_view_medicamentos_lista2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"

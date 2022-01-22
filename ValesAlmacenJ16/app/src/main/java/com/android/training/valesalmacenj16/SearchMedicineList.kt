@@ -82,7 +82,6 @@ class SearchMedicineList : AppCompatActivity() {
                         AlertDialog.Builder(this).setTitle("Guardar clave?").setMessage("Se guardará la clave ${binding.aCTVDescripcion.getText().toString()}")
                             .setPositiveButton("OK",DialogInterface.OnClickListener{
                                 dialog, id ->
-                                val textTemp : TextView
 //                                binding.recyclerViewMedicamentosLista.setLayoutManager(LinearLayoutManager(this))
 //                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.descripcionTvGrid,this, listaMedicamentos,rowItem.descripcionTvGrid.id))
 //                                binding.recyclerViewMedicamentosLista.setAdapter(MyAdapter(rowItem.presentacionTvGrid, this, listaPresentaciones,rowItem.presentacionTvGrid.id))

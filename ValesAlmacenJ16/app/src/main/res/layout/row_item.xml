@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--DEFINIR PATRON PARA TABLE LAYOUT-->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TableLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TableRow>
             <TextView
-                android:id="@+id/descripcion_tv_grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="[DESCRIPCION]"
-                android:textAlignment="center"
-                android:textSize="10sp" />
-
+                android:padding="10dp"
+                android:id="@+id/textViewClaveLista"
+                android:text="{Clave}"/>
             <TextView
-                android:id="@+id/clave_tv_grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="[CLAVE]"
-                android:textSize="10sp"
-                android:paddingRight="30dp"/>
+                android:padding="10dp"
+                android:id="@+id/textPresentacionLista"
+                android:text="{Presentacion}"/>
             <TextView
-                android:id="@+id/presentacion_tv_grid"
-                android:textSize="10sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="[PRESENTACION]"/>
+                android:padding="10dp"
+                android:id="@+id/textViewCantidadLista"
+                android:text="{Cantidad}"/>
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/textViewLoteLista"
+                android:text="{Lote}"/>
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/textViewFCaducidadLista"
+                android:text="{F_Caducidad}"/>
         </TableRow>
     </TableLayout>
+</RelativeLayout>

@@ -8,18 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.training.valesalmacenj16.R
 
-internal class MyAdapter (private var textView : TextView?, private val context: Context, private val list: List<String>, private val idView: Int?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+internal class MyAdapter (private val context: Context, private val list: ArrayList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        var textView : TextView
 
         init {
-            textView = itemView.findViewById(idView!!) // Initialize your All views prensent in list items
+            textView = itemView.findViewById(R.id.textViewClaveLista) // Initialize your All views prensent in list items
         }
 
         fun bind(position: Int) {
             // This method will be called anytime a list item is created or update its data
             //Do your stuff here
-            textView!!.text = list[position]
+            textView.text = list[position]
         }
     }
 
