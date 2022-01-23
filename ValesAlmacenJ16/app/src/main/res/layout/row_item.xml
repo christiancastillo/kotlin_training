@@ -13,23 +13,8 @@
             <TextView
                 android:padding="10dp"
                 android:id="@+id/textViewClaveLista"
-                android:text="{Clave}"/>
-            <TextView
-                android:padding="10dp"
-                android:id="@+id/textPresentacionLista"
-                android:text="{Presentacion}"/>
-            <TextView
-                android:padding="10dp"
-                android:id="@+id/textViewCantidadLista"
-                android:text="{Cantidad}"/>
-            <TextView
-                android:padding="10dp"
-                android:id="@+id/textViewLoteLista"
-                android:text="{Lote}"/>
-            <TextView
-                android:padding="10dp"
-                android:id="@+id/textViewFCaducidadLista"
-                android:text="{F_Caducidad}"/>
+                android:layout_weight="1"
+                android:text=""/>
         </TableRow>
     </TableLayout>
 </RelativeLayout>

@@ -1,44 +1,48 @@
 package com.android.training.valesalmacenj16
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.*
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.training.valesalmacenj16.classes.MyAdapter
-import com.android.training.valesalmacenj16.databinding.ActivitySearchMedicineListBinding
-import java.io.InputStreamReader
 
-private const val TEXT_CONTENTS: String = ""
+private const val TAG : String = "MainActivity"
+private const val LOTE_TXT = ""
 
 class MainActivity : AppCompatActivity(){
+    //DEFINICION DE TEXTS
+    private var TEXT_LOTE: String = "."
+    private var TEXT_FOLIO : String = ""
+    private var TEXT_FECHA_SAL : String = ""
+    private var TEXT_DESTINO : String = ""
+    private var TEXT_CANTIDAD : String = ""
+    private var TEXT_CADUCIDAD : String = ""
+    private var TEXT_PROCEDENCIA : String = ""
+    private var STATUS_CB_CADUCA : Boolean = true
+    private var STATUS_CB_SLOTE : Boolean = true
+    //DEFINICION DE VARIABLES
     private lateinit var buttonSearch: Button
     private lateinit var editTextDateFSalida : EditText
     private lateinit var etDateCad : EditText
     private lateinit var editTextLote : EditText
-    private lateinit var checkNoCaduca :  CheckBox
+    private lateinit var checkNoCaduca : CheckBox
     private lateinit var checkSinLote : CheckBox
     private lateinit var spinProc : Spinner
-    private lateinit var fechaCal : String
     private lateinit var etDescripcionMed : EditText
     private lateinit var etClaveMed : EditText
     private lateinit var etPresentacionMed : EditText
-    private var presentacionMed : String? = ""
-    private var claveMed : String? = ""
-    private var descripcionMed : String? = ""
+    private lateinit var etCantidad : EditText
+    private var presentacionMedInstance : String? = ""
+    private var claveMedInstance : String? = ""
+    private var descripcionMedInstance : String? = ""
     private lateinit var rvListaMeds : RecyclerView
-
-
-    //private lateinit var binding: ActivitySearchMedicineListBinding //el binding debe ser basado en el nombre del activity!
-
-    
+    private var fechaCalendario : String = ""
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -55,11 +59,14 @@ class MainActivity : AppCompatActivity(){
             super.onCreate(savedInstanceState) //1
       //      val view: View = binding.getRoot() //llama al binding del activity
             setContentView(R.layout.activity_main)
+
             setTitle("Generador de vales PDF")//2
+
             //3: Definicion de variables
-            claveMed = intent.getStringExtra("claveInsumo")
-            presentacionMed = intent.getStringExtra("presentacion")
-            descripcionMed = intent.getStringExtra("descripcion")
+            claveMedInstance = intent.getStringExtra("claveInsumo")
+            presentacionMedInstance = intent.getStringExtra("presentacion")
+            descripcionMedInstance = intent.getStringExtra("descripcion")
+
             buttonSearch = findViewById(R.id.buttonSearch)
             editTextDateFSalida = findViewById(R.id.editTextDateFechaSalida)
             checkNoCaduca = findViewById(R.id.checkBoxSincad)
@@ -67,40 +74,47 @@ class MainActivity : AppCompatActivity(){
             editTextLote = findViewById(R.id.editTextLote)
             spinProc = findViewById(R.id.spinnerProcedencia)
             etDateCad = findViewById(R.id.editTextDateCad)
+            etCantidad = findViewById(R.id.editTextQty)
             etPresentacionMed = findViewById(R.id.editTextPresentacion)
             etClaveMed = findViewById(R.id.editTextClave)
             etDescripcionMed = findViewById(R.id.editTextDescripcion)
             rvListaMeds = findViewById(R.id.recyclerview_medicamentos_lista)
             val buttonGuardar : Button = findViewById(R.id.buttonGuardar)
 
-            buttonGuardar.setOnClickListener {
-                var arrayStrings : ArrayList<String> = ArrayList<String>()
-                arrayStrings.add(editTextLote.getText().toString())
-                arrayStrings.add(etDescripcionMed.getText().toString())
-                rvListaMeds.setLayoutManager(LinearLayoutManager(this))
-                rvListaMeds.setAdapter(MyAdapter(this,))
+            if(savedInstanceState != null){
+                editTextLote.setText(savedInstanceState.getString(TEXT_LOTE))
+            }else {
+                TEXT_LOTE = editTextLote.getText().toString()
             }
 
+            var arrayStrings : ArrayList<String> = ArrayList<String>()
+            var mAdapter = MyAdapter(this,arrayStrings)
             var procedenciaStrings = arrayOf("Almacen Estatal", "Otra institución", "Jurisdicción", "Centro de Salud")
             val arrayAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,procedenciaStrings)
             arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             spinProc.setAdapter(arrayAdapter)
 
-            //editTextLote.setText(savedInstanceState!!.getString(TEXT_CONTENTS,""))
-            etDescripcionMed.setText(descripcionMed)
-            etClaveMed.setText(claveMed)
-            etPresentacionMed.setText(presentacionMed)
+            etDescripcionMed.setText(descripcionMedInstance)
+            etClaveMed.setText(claveMedInstance)
+            etPresentacionMed.setText(presentacionMedInstance)
+
+            buttonGuardar.setOnClickListener {
+                arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}")
+                rvListaMeds.setAdapter(mAdapter)
+                rvListaMeds.setLayoutManager(LinearLayoutManager(this))
+                mAdapter.notifyItemInserted(rvListaMeds.size)
+            }
 
             buttonSearch.setOnClickListener {
-                Log.i("MAIN_ACTIVITY", "ENTRA A SET ON CLICKLISTENER")
-                val searchMedicineListActivity = Intent(
-                    this, SearchMedicineList::class.java
-                )
+                Log.i(TAG, "ENTRA A SET ON CLICKLISTENER")
+                val searchMedicineListActivity = Intent(this, SearchMedicineList::class.java)
                 startActivity(searchMedicineListActivity) //cambia de actividad
             }
 
             editTextDateFSalida.setOnClickListener{
                 showDatePicker()
+                editTextDateFSalida.setText(fechaCalendario)
+                fechaCalendario = ""
             }
 
             checkSinLote.setOnClickListener{
@@ -121,9 +135,11 @@ class MainActivity : AppCompatActivity(){
 
             etDateCad.setOnClickListener {
                 showDatePicker()
+                etDateCad.setText(fechaCalendario)
             }
         } catch (e: Exception){
             Log.e("ERROR main activity: ","Error: " + e.message)
+            e.printStackTrace()
                 //Toast.makeText(this, "Error: " + e.message, Toast.LENGTH_LONG).show()
             }
         }
@@ -137,27 +153,40 @@ class MainActivity : AppCompatActivity(){
 
     private fun onDateSelected(day: Int, month: Int, year: Int){
         var fecha = "${day}/${month+1}/${year}"
-        etDateCad.setText(fecha)
-        editTextDateFSalida.setText(fecha)
+        fechaCalendario = fecha
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        editTextLote.setText(savedInstanceState.getString(TEXT_CONTENTS,""))
+        Log.i(TAG,"OnRestoreInstanceState() llamado: ")
+        editTextLote.setText(savedInstanceState.getString(TEXT_LOTE))
+        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(TEXT_CONTENTS,editTextLote.getText().toString())
+        Log.i(TAG,"OnSaveInstanceState(): Llamado")
+        outState.putString(TEXT_LOTE,editTextLote.getText().toString())
+        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onResume() {
         super.onResume()
-        editTextLote.setText("onresume")
+        Log.i(TAG,"OnResume(): Llamado")
+        editTextLote.setText(TEXT_LOTE)
+        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onRestart() {
         super.onRestart()
-        editTextLote.setText("onrestart")
+        Log.i(TAG, "OnRestart(): llamado")
+        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "OnPause(): llamado")
+        TEXT_LOTE = editTextLote.getText().toString()
+        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 }
