@@ -1,16 +1,28 @@
 package com.android.training.valesalmacenj16
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.pm.PackageManager
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.training.valesalmacenj16.classes.MyAdapter
+import java.io.File
+import java.io.FileOutputStream
 
 private const val TAG : String = "MainActivity"
 private const val LOTE_TXT = ""
@@ -99,10 +111,43 @@ class MainActivity : AppCompatActivity(){
             etPresentacionMed.setText(presentacionMedInstance)
 
             buttonGuardar.setOnClickListener {
+//                val requestPermissionLauncher =
+//                    registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+//                        if (isGranted) {
+//                            // Permission is granted. Continue the action or workflow in your
+//                            // app.
+//                            generarPDF()
+//                        } else {
+//                            // Explain to the user that the feature is unavailable because the
+//                            // features requires a permission that the user has denied. At the
+//                            // same time, respect the user's decision. Don't link to system
+//                            // settings in an effort to convince the user to change their
+//                            // decision.
+//                        }
+//                    }
+
                 arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}")
                 rvListaMeds.setAdapter(mAdapter)
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 mAdapter.notifyItemInserted(rvListaMeds.size)
+
+//                when {
+//                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
+//                        generarPDF()
+//                    }
+//                    ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+//                        // In an educational UI, explain to the user why your app requires this
+//                        // permission for a specific feature to behave as expected. In this UI,
+//                        // include a "cancel" or "no thanks" button that allows the user to
+//                        // continue using your app without granting the permission.
+//                    }
+//                    else -> {
+//                        // You can directly ask for the permission.
+//                        // The registered ActivityResultCallback gets the result of this request.
+//                        requestPermissionLauncher.launch(
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    }
+//                }
             }
 
             buttonSearch.setOnClickListener {
@@ -188,5 +233,36 @@ class MainActivity : AppCompatActivity(){
         Log.i(TAG, "OnPause(): llamado")
         TEXT_LOTE = editTextLote.getText().toString()
         Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
+    }
+
+
+    private fun generarPDF(){
+        //Crea un nuevo documento
+        val aPdfDocument: PdfDocument = PdfDocument()
+        val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(100,100,1).create()
+
+        //Empieza una pagina
+        val aPage : PdfDocument.Page = aPdfDocument.startPage(aPageInfo)
+        val aCanvas : Canvas = aPage.getCanvas()
+        val aPaint : Paint = Paint()
+        aPaint.setColor(Color.RED)
+
+        aCanvas.drawCircle(50f,50f,50f,aPaint)
+
+        //Finaliza la página
+        aPdfDocument.finishPage(aPage)
+
+        //Escribe el contenido del documento
+        val targetPDF : String = "/sdcard/report.pdf"
+        val filePath : File = File(targetPDF)
+        try{
+            aPdfDocument.writeTo(FileOutputStream(filePath))
+            Toast.makeText(this,"PDF generado en ruta ${targetPDF}",Toast.LENGTH_SHORT).show()
+        } catch(e: Exception){
+            Log.e(TAG,"Error: ${e.message}")
+            e.printStackTrace()
+        }
+
+
     }
 }
