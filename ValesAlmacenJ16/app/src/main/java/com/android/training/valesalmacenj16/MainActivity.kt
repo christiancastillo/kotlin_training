@@ -238,6 +238,7 @@ class MainActivity : AppCompatActivity(){
 
     private fun generarPDF(){
         //Crea un nuevo documento
+        //TODO: Enlace de interés (Ejemplos) https://www.tabnine.com/code/java/classes/com.itextpdf.text.pdf.PdfDocument | https://developer.android.com/reference/android/graphics/pdf/PdfDocument | https://www.programcreek.com/java-api-examples/?api=android.graphics.pdf.PdfDocument
         val aPdfDocument: PdfDocument = PdfDocument()
         val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(100,100,1).create()
 
