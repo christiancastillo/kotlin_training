@@ -131,23 +131,23 @@ class MainActivity : AppCompatActivity(){
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 mAdapter.notifyItemInserted(rvListaMeds.size)
 
-//                when {
-//                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
-//                        generarPDF()
-//                    }
-//                    ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-//                        // In an educational UI, explain to the user why your app requires this
+                when {
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
+                        generarPDF()
+                    }
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                        // In an educational UI, explain to the user why your app requires this
 //                        // permission for a specific feature to behave as expected. In this UI,
 //                        // include a "cancel" or "no thanks" button that allows the user to
 //                        // continue using your app without granting the permission.
-//                    }
-//                    else -> {
+                    }
+                    else -> {
 //                        // You can directly ask for the permission.
 //                        // The registered ActivityResultCallback gets the result of this request.
 //                        requestPermissionLauncher.launch(
 //                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                    }
-//                }
+                    }
+                }
             }
 
             buttonSearch.setOnClickListener {
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(){
                 etDateCad.setText(fechaCalendario)
             }
         } catch (e: Exception){
-            Log.e("ERROR main activity: ","Error: " + e.message)
+            Log.e(TAG,"Error en mainActivity, onCreate(): " + e.message)
             e.printStackTrace()
                 //Toast.makeText(this, "Error: " + e.message, Toast.LENGTH_LONG).show()
             }
@@ -259,7 +259,7 @@ class MainActivity : AppCompatActivity(){
             aPdfDocument.writeTo(FileOutputStream(filePath))
             Toast.makeText(this,"PDF generado en ruta ${targetPDF}",Toast.LENGTH_SHORT).show()
         } catch(e: Exception){
-            Log.e(TAG,"Error: ${e.message}")
+            Log.e(TAG,"Error en método generarPDF(): ${e.message}")
             e.printStackTrace()
         }
 
