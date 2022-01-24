@@ -253,7 +253,7 @@ class MainActivity : AppCompatActivity(){
         aPdfDocument.finishPage(aPage)
 
         //Escribe el contenido del documento
-        val targetPDF : String = "/sdcard/report.pdf"
+        val targetPDF : String = "/storage/emulated/0/report.pdf"
         val filePath : File = File(targetPDF)
         try{
             aPdfDocument.writeTo(FileOutputStream(filePath))
