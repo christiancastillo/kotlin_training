@@ -133,14 +133,12 @@ class MainActivity : AppCompatActivity(){
                 mAdapter.notifyItemInserted(rvListaMeds.size)
 
                 when {
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
-                        generarPDF()
-                    }
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> generarPDF()
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
                         // In an educational UI, explain to the user why your app requires this
 //                        // permission for a specific feature to behave as expected. In this UI,
 //                        // include a "cancel" or "no thanks" button that allows the user to
-//                        // continue using your app without granting the permission.
+//                        // continue using your app without granting the permission. }
                     }
                     else -> {
 //                        // You can directly ask for the permission.
