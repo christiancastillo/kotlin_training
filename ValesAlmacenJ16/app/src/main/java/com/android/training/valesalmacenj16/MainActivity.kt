@@ -247,12 +247,14 @@ class MainActivity : AppCompatActivity(){
         //Empieza una pagina
         val aPage : PdfDocument.Page = aPdfDocument.startPage(aPageInfo)
         val aCanvas : Canvas = aPage.getCanvas()
+        val canvasRect : Canvas = aPage.getCanvas()
         val paintTexto = Paint()
         val aPaint : Paint = Paint()
 
-        aPaint.setColor(Color.RED)
         paintTexto.setColor(Color.BLACK)
+        aPaint.setColor(Color.BLACK)
         aCanvas.drawText("Encabezado de tabla",70f,50f.toFloat(),paintTexto)
+        canvasRect.drawRect(10f,10f,25f,25f,aPaint)
 
         //Finaliza la página
         aPdfDocument.finishPage(aPage)
@@ -260,7 +262,7 @@ class MainActivity : AppCompatActivity(){
 
 
         //Escribe el contenido del documento
-        val targetPDF : String = "/storage/emulated/0/report.pdf"
+        val targetPDF : String = "/sdcard/report.pdf"
         val filePath : File = File(targetPDF)
         try{
             aPdfDocument.writeTo(FileOutputStream(filePath))
