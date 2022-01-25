@@ -30,7 +30,7 @@ private const val LOTE_TXT = ""
 
 class MainActivity : AppCompatActivity(){
     //DEFINICION DE TEXTS
-    private var TEXT_LOTE: String = "."
+    private var TEXT_LOTE: String = ""
     private var TEXT_FOLIO : String = ""
     private var TEXT_FECHA_SAL : String = ""
     private var TEXT_DESTINO : String = ""
@@ -247,10 +247,12 @@ class MainActivity : AppCompatActivity(){
         //Empieza una pagina
         val aPage : PdfDocument.Page = aPdfDocument.startPage(aPageInfo)
         val aCanvas : Canvas = aPage.getCanvas()
+        val paintTexto = Paint()
         val aPaint : Paint = Paint()
+
         aPaint.setColor(Color.RED)
-        aCanvas.drawCircle(50f,50f,50f,aPaint)
-        aCanvas.drawText("Prueba de texto",120F,120F,aPaint)
+        paintTexto.setColor(Color.BLACK)
+        aCanvas.drawText("Encabezado de tabla",70f,50f.toFloat(),paintTexto)
 
         //Finaliza la página
         aPdfDocument.finishPage(aPage)
