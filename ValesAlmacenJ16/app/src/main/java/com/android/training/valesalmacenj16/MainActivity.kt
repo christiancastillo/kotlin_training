@@ -117,7 +117,6 @@ class MainActivity : AppCompatActivity(){
 //                        if (isGranted) {
 //                            // Permission is granted. Continue the action or workflow in your
 //                            // app.
-//                            generarPDF()
 //                        } else {
 //                            // Explain to the user that the feature is unavailable because the
 //                            // features requires a permission that the user has denied. At the
