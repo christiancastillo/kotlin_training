@@ -11,6 +11,7 @@ import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.style.ParagraphStyle
 import android.util.Log
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -239,19 +240,22 @@ class MainActivity : AppCompatActivity(){
     private fun generarPDF(){
         //Crea un nuevo documento
         //TODO: Enlace de interés (Ejemplos) https://www.tabnine.com/code/java/classes/com.itextpdf.text.pdf.PdfDocument | https://developer.android.com/reference/android/graphics/pdf/PdfDocument | https://www.programcreek.com/java-api-examples/?api=android.graphics.pdf.PdfDocument
-        val aPdfDocument: PdfDocument = PdfDocument()
-        val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(100,100,1).create()
+        var aPdfDocument: PdfDocument = PdfDocument()
+        //val aParagraphStyle = ParagraphStyle()
+        val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(200,200,1).create()
 
         //Empieza una pagina
         val aPage : PdfDocument.Page = aPdfDocument.startPage(aPageInfo)
         val aCanvas : Canvas = aPage.getCanvas()
         val aPaint : Paint = Paint()
         aPaint.setColor(Color.RED)
-
         aCanvas.drawCircle(50f,50f,50f,aPaint)
+        aCanvas.drawText("Prueba de texto",120F,120F,aPaint)
 
         //Finaliza la página
         aPdfDocument.finishPage(aPage)
+
+
 
         //Escribe el contenido del documento
         val targetPDF : String = "/storage/emulated/0/report.pdf"
@@ -262,6 +266,8 @@ class MainActivity : AppCompatActivity(){
         } catch(e: Exception){
             Log.e(TAG,"Error en método generarPDF(): ${e.message}")
             e.printStackTrace()
+        } finally {
+            aPdfDocument.close()
         }
 
 
