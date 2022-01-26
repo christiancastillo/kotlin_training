@@ -9,12 +9,14 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.style.ParagraphStyle
 import android.util.Log
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,7 +28,6 @@ import java.io.File
 import java.io.FileOutputStream
 
 private const val TAG : String = "MainActivity"
-private const val LOTE_TXT = ""
 
 class MainActivity : AppCompatActivity(){
     //DEFINICION DE TEXTS
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity(){
     private var descripcionMedInstance : String? = ""
     private lateinit var rvListaMeds : RecyclerView
     private var fechaCalendario : String = ""
+    var REQUEST_CODE = 200;
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -65,8 +67,18 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun verificarPermision(){
+        var permisoEscritura : Int = ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (permisoEscritura == PackageManager.PERMISSION_GRANTED){
+            //metodo
+            Toast.makeText(this,"Permiso de almacenamiento concedido",Toast.LENGTH_SHORT).show()
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),this.REQUEST_CODE)
+        }
+    }
 
-
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
             super.onCreate(savedInstanceState) //1
@@ -115,9 +127,11 @@ class MainActivity : AppCompatActivity(){
 //                val requestPermissionLauncher =
 //                    registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
 //                        if (isGranted) {
+                            //Toast.makeText(this,"Permiso aceptado",Toast.LENGTH_SHORT).show()
 //                            // Permission is granted. Continue the action or workflow in your
 //                            // app.
 //                        } else {
+//                            Toast.makeText(this,"Permiso denegado, por favor de permisos a la aplicación.",Toast.LENGTH_SHORT).show()
 //                            // Explain to the user that the feature is unavailable because the
 //                            // features requires a permission that the user has denied. At the
 //                            // same time, respect the user's decision. Don't link to system
@@ -126,11 +140,7 @@ class MainActivity : AppCompatActivity(){
 //                        }
 //                    }
 
-                arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}")
-                rvListaMeds.setAdapter(mAdapter)
-                rvListaMeds.setLayoutManager(LinearLayoutManager(this))
-                mAdapter.notifyItemInserted(rvListaMeds.size)
-
+                //TODO: Crear codigo para que cuando se le de clic al boton, preguntar si desea dar permiso
                 when {
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> generarPDF()
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
@@ -138,14 +148,19 @@ class MainActivity : AppCompatActivity(){
 //                        // permission for a specific feature to behave as expected. In this UI,
 //                        // include a "cancel" or "no thanks" button that allows the user to
 //                        // continue using your app without granting the permission. }
+                        //Toast.makeText(this,"Es necesario permitir escritura en la app para generar el reporte.",Toast.LENGTH_SHORT).show()
                     }
                     else -> {
+                        verificarPermision()
 //                        // You can directly ask for the permission.
 //                        // The registered ActivityResultCallback gets the result of this request.
-//                        requestPermissionLauncher.launch(
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        //requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     }
                 }
+                arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}")
+                rvListaMeds.setAdapter(mAdapter)
+                rvListaMeds.setLayoutManager(LinearLayoutManager(this))
+                mAdapter.notifyItemInserted(rvListaMeds.size)
             }
 
             buttonSearch.setOnClickListener {
