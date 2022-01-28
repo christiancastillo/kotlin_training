@@ -5,13 +5,16 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+import android.graphics.pdf.PdfRenderer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.ParcelFileDescriptor
 import android.text.style.ParagraphStyle
 import android.util.Log
 import android.widget.*
@@ -142,16 +145,28 @@ class MainActivity : AppCompatActivity(){
 
                 //TODO: Crear codigo para que cuando se le de clic al boton, preguntar si desea dar permiso
                 when {
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> generarPDF()
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
+                        Log.i(TAG,"PERMISO CONCEDIDO")
+                        generarPDF()
+                    }
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                        Log.i(TAG,"PERMISO DENEGADO")
                         // In an educational UI, explain to the user why your app requires this
 //                        // permission for a specific feature to behave as expected. In this UI,
 //                        // include a "cancel" or "no thanks" button that allows the user to
 //                        // continue using your app without granting the permission. }
                         //Toast.makeText(this,"Es necesario permitir escritura en la app para generar el reporte.",Toast.LENGTH_SHORT).show()
+                        val permisos: Array<String> = arrayOf("")
+                        permisos[0] = Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        AlertDialog.Builder(this).setTitle("- Alerta -")
+                            .setMessage("Se necesita dar permiso para almacenar en medios externos.")
+                            .setPositiveButton("ENTIENDO, DARE PERMISO",DialogInterface.OnClickListener { dialog, id ->
+                                ActivityCompat.requestPermissions(this,permisos,0)
+                            }).show()
                     }
                     else -> {
-                        verificarPermision()
+                        Log.i(TAG,"PERMISO DENEGADO?")
+                        //verificarPermision()
 //                        // You can directly ask for the permission.
 //                        // The registered ActivityResultCallback gets the result of this request.
                         //requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -249,12 +264,30 @@ class MainActivity : AppCompatActivity(){
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun cargarPDF(aPdf : File){
+        try{
+            val pdf = ParcelFileDescriptor.open(aPdf, ParcelFileDescriptor.MODE_READ_ONLY)
+            val pdfRenderer = PdfRenderer(pdf)
+            val page = pdfRenderer.openPage(0)
+            val bitmap = Bitmap.createBitmap(100,100,Bitmap.Config.ARGB_8888)
+            page.render(bitmap, null, null,PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+            page.close()
+            pdfRenderer.close()
+        } catch(e: Exception){
+            Log.e(TAG,"Error: ${e.message}")
+            e.printStackTrace()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun generarPDF(){
+        //Enlace de interés: https://stackoverflow.com/questions/27941522/how-to-set-pdf-file-size-using-pdfdocument-on-android
         //Crea un nuevo documento
         //TODO: Enlace de interés (Ejemplos) https://www.tabnine.com/code/java/classes/com.itextpdf.text.pdf.PdfDocument | https://developer.android.com/reference/android/graphics/pdf/PdfDocument | https://www.programcreek.com/java-api-examples/?api=android.graphics.pdf.PdfDocument
         var aPdfDocument: PdfDocument = PdfDocument()
         //val aParagraphStyle = ParagraphStyle()
-        val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(200,200,1).create()
+        val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(612,792,1).create()
 
         //Empieza una pagina
         val aPage : PdfDocument.Page = aPdfDocument.startPage(aPageInfo)
@@ -265,16 +298,16 @@ class MainActivity : AppCompatActivity(){
 
         paintTexto.setColor(Color.BLACK)
         aPaint.setColor(Color.BLACK)
-        aCanvas.drawText("Encabezado de tabla",70f,50f.toFloat(),paintTexto)
+        aCanvas.drawText("Vale de salida",70f,50f, paintTexto)
+        aCanvas.drawText("JURISDICCION SANITARIA 16 JACALA", 70f, 70f, paintTexto)
         canvasRect.drawRect(10f,10f,25f,25f,aPaint)
 
         //Finaliza la página
         aPdfDocument.finishPage(aPage)
 
 
-
         //Escribe el contenido del documento
-        val targetPDF : String = "/sdcard/report.pdf"
+        val targetPDF : String = "/storage/emulated/0/Documents/report.pdf"
         val filePath : File = File(targetPDF)
         try{
             aPdfDocument.writeTo(FileOutputStream(filePath))

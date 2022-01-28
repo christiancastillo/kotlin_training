@@ -2,8 +2,6 @@ package com.android.training.valesalmacenj16
 
 import com.android.training.valesalmacenj16.R
 import android.annotation.SuppressLint
-
-import android.R.*
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
