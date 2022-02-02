@@ -15,6 +15,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.text.TextPaint
 import android.text.style.ParagraphStyle
 import android.util.Log
 import android.widget.*
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var rvListaMeds : RecyclerView
     private var fechaCalendario : String = ""
     var REQUEST_CODE = 200;
+    var arrayStrings : ArrayList<String> = ArrayList<String>()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -115,7 +117,6 @@ class MainActivity : AppCompatActivity(){
                 TEXT_LOTE = editTextLote.getText().toString()
             }
 
-            var arrayStrings : ArrayList<String> = ArrayList<String>()
             var mAdapter = MyAdapter(this,arrayStrings)
             var procedenciaStrings = arrayOf("Almacen Estatal", "Otra institución", "Jurisdicción", "Centro de Salud")
             val arrayAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,procedenciaStrings)
@@ -292,7 +293,6 @@ class MainActivity : AppCompatActivity(){
         //Empieza una pagina
         val aPage : PdfDocument.Page = aPdfDocument.startPage(aPageInfo)
         val aCanvas : Canvas = aPage.getCanvas()
-        val canvasRect : Canvas = aPage.getCanvas()
         val paintTexto = Paint()
         val aPaint : Paint = Paint()
 
@@ -300,7 +300,11 @@ class MainActivity : AppCompatActivity(){
         aPaint.setColor(Color.BLACK)
         aCanvas.drawText("Vale de salida",70f,50f, paintTexto)
         aCanvas.drawText("JURISDICCION SANITARIA 16 JACALA", 70f, 70f, paintTexto)
-        canvasRect.drawRect(10f,10f,25f,25f,aPaint)
+        aCanvas.drawText("INFORMACION DE VALE: ",70f, 90f, paintTexto)
+        aCanvas.drawText("CLAVE      DESCRIPCION       PRESENTACION      CANTIDAD     LOTE",70f,90f,paintTexto)
+
+
+        //canvasRect.drawRect(10f,10f,25f,25f,aPaint)
 
         //Finaliza la página
         aPdfDocument.finishPage(aPage)
