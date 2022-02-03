@@ -337,6 +337,12 @@
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/editTextDateCad" />
 
+        <TextView
+            android:id="@+id/textViewRemision"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_medicamentos_lista"
             android:layout_width="match_parent"
@@ -350,36 +356,49 @@
 
         <TableLayout
             android:id="@+id/table_layout_rows"
+            android:layout_width="744dp"
+            android:layout_height="43dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerProcedencia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TableRow>
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerProcedencia">
+
+
+
+            <TableRow android:layout_width="506dp">
+
                 <TextView
-                    android:padding="10dp"
                     android:id="@+id/textViewClaveLista"
-                    android:text="Clave"/>
-                <TextView
                     android:padding="10dp"
+                    android:text="Clave" />
+
+                <TextView
                     android:id="@+id/textViewDescLista"
-                    android:text="Descripcion"/>
-                <TextView
                     android:padding="10dp"
+                    android:text="Descripcion" />
+
+                <TextView
                     android:id="@+id/textPresentacionLista"
-                    android:text="Presentación"/>
-                <TextView
                     android:padding="10dp"
+                    android:text="Presentación" />
+
+                <TextView
                     android:id="@+id/textViewCantidadLista"
-                    android:text="Cantidad"/>
-                <TextView
                     android:padding="10dp"
+                    android:text="Cantidad" />
+
+                <TextView
                     android:id="@+id/textViewLoteLista"
-                    android:text="Lote"/>
-                <TextView
                     android:padding="10dp"
+                    android:text="Lote" />
+
+                <TextView
                     android:id="@+id/textViewFCaducidadLista"
-                    android:text="Caducidad"/>
+                    android:layout_width="97dp"
+                    android:padding="10dp"
+                    android:text="Caducidad" />
             </TableRow>
         </TableLayout>
 
