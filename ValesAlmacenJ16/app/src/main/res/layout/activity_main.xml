@@ -36,6 +36,7 @@
             android:layout_marginTop="20dp"
             android:text="Folio"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewSSHLogo" />
 
@@ -84,6 +85,7 @@
             android:layout_marginTop="32dp"
             android:text="Destino"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewFecha" />
 
@@ -95,6 +97,7 @@
             android:layout_marginTop="32dp"
             android:text="Fecha"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewFolio" />
 
@@ -133,6 +136,7 @@
             android:layout_marginTop="32dp"
             android:text="Clave"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDestino" />
 
@@ -166,6 +170,7 @@
             android:layout_marginTop="88dp"
             android:text="Descripcion"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -177,6 +182,7 @@
             android:layout_marginTop="92dp"
             android:text="Presentacion"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -219,6 +225,7 @@
             android:hint="Ej: 100"
             android:text="Cantidad:"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPresentacion" />
 
@@ -243,6 +250,7 @@
             android:layout_marginTop="44dp"
             android:text="Lote"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewCantidad" />
 
@@ -290,6 +298,7 @@
             android:layout_marginTop="50dp"
             android:text="Caducidad"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewLote" />
 
@@ -323,6 +332,7 @@
             android:layout_marginTop="50dp"
             android:text="Procedencia"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -339,9 +349,26 @@
 
         <TextView
             android:id="@+id/textViewRemision"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:text="Remisión / vale: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <EditText
+            android:id="@+id/edRemision"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/textViewRemision"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="06261-1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewRemision" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_medicamentos_lista"
@@ -359,15 +386,12 @@
             android:layout_width="744dp"
             android:layout_height="43dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerProcedencia">
-
-
-
-            <TableRow android:layout_width="506dp">
+            <TableRow android:layout_width="530dp">
 
                 <TextView
                     android:id="@+id/textViewClaveLista"
@@ -399,6 +423,11 @@
                     android:layout_width="97dp"
                     android:padding="10dp"
                     android:text="Caducidad" />
+                <TextView
+                    android:id="@+id/textViewRemisionVale"
+                    android:text="Remision o vale"
+                    android:padding="10dp"
+                    android:layout_width="130dp"/>
             </TableRow>
         </TableLayout>
 
