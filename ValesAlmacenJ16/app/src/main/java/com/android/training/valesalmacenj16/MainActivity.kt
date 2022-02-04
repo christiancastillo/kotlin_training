@@ -148,6 +148,11 @@ class MainActivity : AppCompatActivity(){
                 when {
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
                         Log.i(TAG,"PERMISO CONCEDIDO")
+                        AlertDialog.Builder(this).setTitle("INFORMACION")
+                            .setMessage("El reporte fué creado, ¿Desea abrir el archivo?")
+                            .setPositiveButton("SI",DialogInterface.OnClickListener{dialog, id ->
+                                //
+                            })
                         generarPDF()
                     }
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
@@ -322,7 +327,5 @@ class MainActivity : AppCompatActivity(){
         } finally {
             aPdfDocument.close()
         }
-
-
     }
 }
