@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -11,6 +12,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfRenderer
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.training.valesalmacenj16.classes.MyAdapter
 import java.io.File
 import java.io.FileOutputStream
+import java.net.URI
 
 private const val TAG : String = "MainActivity"
 
@@ -271,17 +274,14 @@ class MainActivity : AppCompatActivity(){
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun cargarPDF(aPdf : File){
+    private fun cargarPDF(urlFile : Uri, context: Context){
         try{
-            val pdf = ParcelFileDescriptor.open(aPdf, ParcelFileDescriptor.MODE_READ_ONLY)
-            val pdfRenderer = PdfRenderer(pdf)
-            val page = pdfRenderer.openPage(0)
-            val bitmap = Bitmap.createBitmap(100,100,Bitmap.Config.ARGB_8888)
-            page.render(bitmap, null, null,PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-            page.close()
-            pdfRenderer.close()
+            var openPDF = Intent(Intent.ACTION_VIEW)
+            openPDF.setDataAndType(urlFile,"application/pdf")
+            openPDF.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            context.startActivity(openPDF)
         } catch(e: Exception){
-            Log.e(TAG,"Error: ${e.message}")
+            Log.e(TAG,"Error en metodo cargarPDF(): ${e.message}")
             e.printStackTrace()
         }
     }
@@ -318,6 +318,8 @@ class MainActivity : AppCompatActivity(){
         //Escribe el contenido del documento
         val targetPDF : String = "/storage/emulated/0/Documents/report.pdf"
         val filePath : File = File(targetPDF)
+        val pdfUri : Uri = Uri.parse(targetPDF)
+
         try{
             aPdfDocument.writeTo(FileOutputStream(filePath))
             Toast.makeText(this,"PDF generado en ruta ${targetPDF}",Toast.LENGTH_SHORT).show()

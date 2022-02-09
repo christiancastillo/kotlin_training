@@ -1,9 +1,12 @@
 package com.android.training.toptendownloaderapp
 
+import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.loader.content.AsyncTaskLoader
 import com.android.training.toptendownloaderapp.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -13,6 +16,7 @@ import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import kotlin.properties.Delegates
 
 class FeedEntry {
     var name:String = ""
@@ -35,21 +39,35 @@ class FeedEntry {
 class MainActivity : AppCompatActivity() {
     //private var binding = ActivityMainBinding.inflate(layoutInflater)
     private val TAG = "MainActivity"
+    var xmlListView : ListView = findViewById(R.id.xmlListView)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //var binding = ActivityMainBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-        //setContentView(binding.getRoot())
-        setContentView(R.layout.activity_main)
-        Log.d(TAG, "onCreate called!")
-        val downloadData = DownloadData()
-        downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml")
-        Log.d(TAG, "onCreate: done")
+        try{
+            //var binding = ActivityMainBinding.inflate(layoutInflater)
+            super.onCreate(savedInstanceState)
+            //setContentView(binding.getRoot())
+            setContentView(R.layout.activity_main)
+            Log.d(TAG, "onCreate called!")
+            val downloadData = DownloadData(this,xmlListView)
+            downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml")
+            Log.d(TAG, "onCreate: done")
+        } catch(e: Exception){
+            Log.e("MAINACTIVITY","Error: ********* ${e.message.toString()}")
+            e.printStackTrace()
+        }
     }
 
     companion object{ //equivalent to static class
-        private class DownloadData : AsyncTask<String, Void, String>() {
+        private class DownloadData(context: Context, listView:ListView) : AsyncTask<String, Void, String>() {
             private val TAG = "DownloadData"
+            var propContext : Context by Delegates.notNull()
+            var propListView : ListView by Delegates.notNull()
+
+            init{
+                propContext = context
+                propListView = listView
+            }
+
             override fun doInBackground(vararg url: String?): String {
                 Log.d(TAG,"doInBackground called, starts with: ${url[0]}")
                 val rssFeed = downloadXML(url[0])
@@ -64,6 +82,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG,"onPostExecute called, parameter: $result")
                 val parseApplication = ParseApplication()
                 parseApplication.parseXML(result)
+
+                val arrayAdapter = ArrayAdapter<FeedEntry>(propContext,R.layout.list_item,parseApplication.application)
+                propListView.adapter = arrayAdapter
             }
 
             private fun downloadXML(urlPath: String?):String{

@@ -12,6 +12,7 @@ class ParseApplication {
         Log.d(TAG, "parse called with $xmlData")
         var status = true
         var inEntry = false
+        var getImage = false
         var textValue = ""
 
         try {
@@ -22,7 +23,7 @@ class ParseApplication {
             var eventType = xpp.getEventType()
             var currentRecord = FeedEntry()
             while(eventType != XmlPullParser.END_DOCUMENT){
-                val tagName = xpp.name.toLowerCase() //TODO: We should use the safe call operator ?
+                val tagName = xpp.name?.toLowerCase()
                 when (eventType){
                     XmlPullParser.START_TAG -> {
                         Log.d(TAG, "parse: Starting tag for "+tagName)
