@@ -20,6 +20,13 @@
             android:name=".SearchMedicineList"
             android:exported="false" />
         <activity android:name=".MainActivity"></activity>
+        
+        <provider
+            android:authorities="com.android.training.valesalmacenj16.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true">
+
+        </provider>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

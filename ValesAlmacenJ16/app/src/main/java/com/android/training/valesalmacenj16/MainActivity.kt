@@ -26,6 +26,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -318,11 +319,15 @@ class MainActivity : AppCompatActivity(){
         //Escribe el contenido del documento
         val targetPDF : String = "/storage/emulated/0/Documents/report.pdf"
         val filePath : File = File(targetPDF)
-        val pdfUri : Uri = Uri.parse(targetPDF)
+        //val pdfUri : Uri = Uri.parse(targetPDF)
+        //val pdfUri : Uri = Uri.fromFile(filePath)
+        //TODO: Revisar FileProvider para cargar PDF en Intent https://developer.android.com/reference/kotlin/androidx/core/content/FileProvider
+        val pdfUri = FileProvider.getUriForFile(this,"com.android.training.valesalmacenj16",filePath)
 
         try{
             aPdfDocument.writeTo(FileOutputStream(filePath))
             Toast.makeText(this,"PDF generado en ruta ${targetPDF}",Toast.LENGTH_SHORT).show()
+            cargarPDF(pdfUri,this)
         } catch(e: Exception){
             Log.e(TAG,"Error en método generarPDF(): ${e.message}")
             e.printStackTrace()
