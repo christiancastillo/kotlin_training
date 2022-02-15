@@ -20,6 +20,7 @@ import android.os.ParcelFileDescriptor
 import android.text.TextPaint
 import android.text.style.ParagraphStyle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -65,6 +66,8 @@ class MainActivity : AppCompatActivity(){
     private var descripcionMedInstance : String? = ""
     private lateinit var rvListaMeds : RecyclerView
     private var fechaCalendario : String = ""
+    private lateinit var btnVerReporte : Button
+
     var REQUEST_CODE = 200;
     var arrayStrings : ArrayList<String> = ArrayList<String>()
 
@@ -114,6 +117,8 @@ class MainActivity : AppCompatActivity(){
             etDescripcionMed = findViewById(R.id.editTextDescripcion)
             rvListaMeds = findViewById(R.id.recyclerview_medicamentos_lista)
             val buttonGuardar : Button = findViewById(R.id.buttonGuardar)
+            btnVerReporte = findViewById(R.id.buttonVerReporte)
+
 
             if(savedInstanceState != null){
                 editTextLote.setText(savedInstanceState.getString(TEXT_LOTE))
@@ -157,7 +162,6 @@ class MainActivity : AppCompatActivity(){
                             .setPositiveButton("SI",DialogInterface.OnClickListener{dialog, id ->
                                 //
                             })
-                        generarPDF()
                     }
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
                         Log.i(TAG,"PERMISO DENEGADO")
@@ -186,6 +190,10 @@ class MainActivity : AppCompatActivity(){
                 rvListaMeds.setAdapter(mAdapter)
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 mAdapter.notifyItemInserted(rvListaMeds.size)
+            }
+
+            btnVerReporte.setOnClickListener {
+                generarPDF()
             }
 
             buttonSearch.setOnClickListener {
@@ -293,7 +301,6 @@ class MainActivity : AppCompatActivity(){
         //Crea un nuevo documento
         //TODO: Enlace de interés (Ejemplos) https://www.tabnine.com/code/java/classes/com.itextpdf.text.pdf.PdfDocument | https://developer.android.com/reference/android/graphics/pdf/PdfDocument | https://www.programcreek.com/java-api-examples/?api=android.graphics.pdf.PdfDocument
         var aPdfDocument: PdfDocument = PdfDocument()
-        //val aParagraphStyle = ParagraphStyle()
         val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(612,792,1).create()
 
         //Empieza una pagina
@@ -301,33 +308,43 @@ class MainActivity : AppCompatActivity(){
         val aCanvas : Canvas = aPage.getCanvas()
         val paintTexto = Paint()
         val aPaint : Paint = Paint()
+        val recyclerViewLista = findViewById<RecyclerView>(R.id.recyclerview_medicamentos_lista)
 
         paintTexto.setColor(Color.BLACK)
         aPaint.setColor(Color.BLACK)
         aCanvas.drawText("Vale de salida",70f,50f, paintTexto)
         aCanvas.drawText("JURISDICCION SANITARIA 16 JACALA", 70f, 70f, paintTexto)
         aCanvas.drawText("INFORMACION DE VALE: ",70f, 90f, paintTexto)
-        aCanvas.drawText("CLAVE      DESCRIPCION       PRESENTACION      CANTIDAD     LOTE",70f,90f,paintTexto)
+        aCanvas.drawText("CLAVE      DESCRIPCION       PRESENTACION      CANTIDAD     LOTE",70f,110f,paintTexto)
 
+        var i:Int = 0
+        var hijo : String = ""
+        var child : View
+
+        while(i <= recyclerViewLista.getChildCount()){
+            child = recyclerViewLista.getChildAt(i)
+            Log.i(TAG,"Child at ${i}: ${child}")
+            //hijo = hijo + recyclerViewLista.getChildViewHolder(recyclerViewLista).getAdapterPosition() + "\n"
+            i++
+        }
+        aCanvas.drawText(hijo,70f, 125f,paintTexto)
 
         //canvasRect.drawRect(10f,10f,25f,25f,aPaint)
-
         //Finaliza la página
         aPdfDocument.finishPage(aPage)
-
 
         //Escribe el contenido del documento
         val targetPDF : String = "/storage/emulated/0/Documents/report.pdf"
         val filePath : File = File(targetPDF)
         //val pdfUri : Uri = Uri.parse(targetPDF)
-        //val pdfUri : Uri = Uri.fromFile(filePath)
+        val pdfUri : Uri = Uri.fromFile(filePath)
         //TODO: Revisar FileProvider para cargar PDF en Intent https://developer.android.com/reference/kotlin/androidx/core/content/FileProvider
-        val pdfUri = FileProvider.getUriForFile(this,"com.android.training.valesalmacenj16",filePath)
+        //val pdfUri = FileProvider.getUriForFile(this,"com.android.training.valesalmacenj16",filePath)
 
         try{
             aPdfDocument.writeTo(FileOutputStream(filePath))
             Toast.makeText(this,"PDF generado en ruta ${targetPDF}",Toast.LENGTH_SHORT).show()
-            cargarPDF(pdfUri,this)
+            //cargarPDF(pdfUri,this)
         } catch(e: Exception){
             Log.e(TAG,"Error en método generarPDF(): ${e.message}")
             e.printStackTrace()
