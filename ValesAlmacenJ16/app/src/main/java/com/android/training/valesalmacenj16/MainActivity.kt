@@ -40,6 +40,7 @@ private const val TAG : String = "MainActivity"
 
 class MainActivity : AppCompatActivity(){
     //DEFINICION DE TEXTS
+    var procedenciaSpin = ""
     private var TEXT_LOTE: String = ""
     private var TEXT_FOLIO : String = ""
     private var TEXT_FECHA_SAL : String = ""
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity(){
     private var STATUS_CB_CADUCA : Boolean = true
     private var STATUS_CB_SLOTE : Boolean = true
     //DEFINICION DE VARIABLES
+    private lateinit var spinnerProcedencia : Spinner
     private lateinit var buttonSearch: Button
     private lateinit var editTextDateFSalida : EditText
     private lateinit var etDateCad : EditText
@@ -118,6 +120,7 @@ class MainActivity : AppCompatActivity(){
             rvListaMeds = findViewById(R.id.recyclerview_medicamentos_lista)
             val buttonGuardar : Button = findViewById(R.id.buttonGuardar)
             btnVerReporte = findViewById(R.id.buttonVerReporte)
+            spinnerProcedencia = findViewById(R.id.spinnerProcedencia)
 
 
             if(savedInstanceState != null){
@@ -135,6 +138,18 @@ class MainActivity : AppCompatActivity(){
             etDescripcionMed.setText(descripcionMedInstance)
             etClaveMed.setText(claveMedInstance)
             etPresentacionMed.setText(presentacionMedInstance)
+
+            spinProc.setOnItemSelectedListener(
+                AdapterView.OnItemSelectedListener{
+                    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                        parent.getItemAtPosition(pos)
+                    }
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+
+                    }
+                }
+            }
+
 
             buttonGuardar.setOnClickListener {
 //                val requestPermissionLauncher =
@@ -186,7 +201,7 @@ class MainActivity : AppCompatActivity(){
                         //requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     }
                 }
-                arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}")
+                arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}      ${procedenciaSpin}")
                 rvListaMeds.setAdapter(mAdapter)
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 mAdapter.notifyItemInserted(rvListaMeds.size)
@@ -322,9 +337,9 @@ class MainActivity : AppCompatActivity(){
         var child : View
 
         while(i <= recyclerViewLista.getChildCount()){
-            child = recyclerViewLista.getChildAt(i)
-            Log.i(TAG,"Child at ${i}: ${child}")
-            //hijo = hijo + recyclerViewLista.getChildViewHolder(recyclerViewLista).getAdapterPosition() + "\n"
+//            child = recyclerViewLista.getChildAt(i)
+            //Log.i(TAG,"Child at ${i}: ${child}")
+            hijo = hijo + recyclerViewLista.adapter!!.getItemId(i) + "\n"
             i++
         }
         aCanvas.drawText(hijo,70f, 125f,paintTexto)
