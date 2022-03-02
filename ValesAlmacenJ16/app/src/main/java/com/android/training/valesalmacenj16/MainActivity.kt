@@ -139,16 +139,6 @@ class MainActivity : AppCompatActivity(){
             etClaveMed.setText(claveMedInstance)
             etPresentacionMed.setText(presentacionMedInstance)
 
-            spinProc.setOnItemSelectedListener(
-                AdapterView.OnItemSelectedListener{
-                    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                        parent.getItemAtPosition(pos)
-                    }
-                    override fun onNothingSelected(parent: AdapterView<*>) {
-
-                    }
-                }
-            }
 
 
             buttonGuardar.setOnClickListener {
@@ -156,7 +146,7 @@ class MainActivity : AppCompatActivity(){
 //                    registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
 //                        if (isGranted) {
                             //Toast.makeText(this,"Permiso aceptado",Toast.LENGTH_SHORT).show()
-//                            // Permission is granted. Continue the action or workflow in your
+//                            // Permission is granted. Continue th e action or workflow in your
 //                            // app.
 //                        } else {
 //                            Toast.makeText(this,"Permiso denegado, por favor de permisos a la aplicación.",Toast.LENGTH_SHORT).show()
