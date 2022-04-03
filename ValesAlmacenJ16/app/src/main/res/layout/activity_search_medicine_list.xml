@@ -12,16 +12,15 @@
 
         <Button
             android:id="@+id/buttonAgregarMedicamento"
-            android:layout_width="46dp"
-            android:layout_height="53dp"
-            android:layout_marginEnd="16dp"
-            android:width="5dp"
-            android:textAlignment="gravity"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            android:text="Agregar y regresar"
+            android:textAlignment="center"
             app:icon="@android:drawable/ic_menu_add"
-            app:layout_constraintBaseline_toBaselineOf="@+id/aCTVDescripcion"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/aCTVDescripcion" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewClaveJSON" />
 
         <TextView
             android:id="@+id/textView"
@@ -48,15 +47,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:hint="Ej: Ibuprofeno"
             android:lines="5"
             android:maxLines="7"
             android:minHeight="48dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAgregarMedicamento"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView" />
 
         <TextView
             android:id="@+id/textViewPresentacionJSON"
@@ -93,15 +91,5 @@
             tools:text="{claveMedicamento}" />
 
         <!--GRIDVIEW para lista de medicamentos-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_medicamentos_lista2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewClaveJSON"
-            android:layout_marginTop="20dp"
-            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

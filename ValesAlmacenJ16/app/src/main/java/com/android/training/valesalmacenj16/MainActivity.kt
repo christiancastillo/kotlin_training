@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var rvListaMeds : RecyclerView
     private var fechaCalendario : String = ""
     private lateinit var btnVerReporte : Button
+    private lateinit var etRemision : EditText
 
     var REQUEST_CODE = 200;
     var arrayStrings : ArrayList<String> = ArrayList<String>()
@@ -118,6 +119,8 @@ class MainActivity : AppCompatActivity(){
             etClaveMed = findViewById(R.id.editTextClave)
             etDescripcionMed = findViewById(R.id.editTextDescripcion)
             rvListaMeds = findViewById(R.id.recyclerview_medicamentos_lista)
+            etRemision = findViewById(R.id.edRemision)
+
             val buttonGuardar : Button = findViewById(R.id.buttonGuardar)
             btnVerReporte = findViewById(R.id.buttonVerReporte)
             spinnerProcedencia = findViewById(R.id.spinnerProcedencia)
@@ -129,35 +132,17 @@ class MainActivity : AppCompatActivity(){
                 TEXT_LOTE = editTextLote.getText().toString()
             }
 
-            var mAdapter = MyAdapter(this,arrayStrings)
             var procedenciaStrings = arrayOf("Almacen Estatal", "Otra institución", "Jurisdicción", "Centro de Salud")
             val arrayAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,procedenciaStrings)
             arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             spinProc.setAdapter(arrayAdapter)
 
+
             etDescripcionMed.setText(descripcionMedInstance)
             etClaveMed.setText(claveMedInstance)
             etPresentacionMed.setText(presentacionMedInstance)
 
-
-
             buttonGuardar.setOnClickListener {
-//                val requestPermissionLauncher =
-//                    registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-//                        if (isGranted) {
-                            //Toast.makeText(this,"Permiso aceptado",Toast.LENGTH_SHORT).show()
-//                            // Permission is granted. Continue th e action or workflow in your
-//                            // app.
-//                        } else {
-//                            Toast.makeText(this,"Permiso denegado, por favor de permisos a la aplicación.",Toast.LENGTH_SHORT).show()
-//                            // Explain to the user that the feature is unavailable because the
-//                            // features requires a permission that the user has denied. At the
-//                            // same time, respect the user's decision. Don't link to system
-//                            // settings in an effort to convince the user to change their
-//                            // decision.
-//                        }
-//                    }
-
                 //TODO: Crear codigo para que cuando se le de clic al boton, preguntar si desea dar permiso
                 when {
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
@@ -191,8 +176,20 @@ class MainActivity : AppCompatActivity(){
                         //requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     }
                 }
-                arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etCantidad.getText()}    ${etDateCad.getText()}      ${procedenciaSpin}")
+                var valorSpinnerProcedencia = spinProc.getSelectedItem().toString()
+                //arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etDateCad.getText()}  ${valorSpinnerProcedencia}")
+                arrayStrings.add(etClaveMed.getText().toString())
+                arrayStrings.add(etPresentacionMed.getText().toString())
+//                arrayStrings.add(etDescripcionMed.getText().toString())
+//                arrayStrings.add(etCantidad.getText().toString())
+//                arrayStrings.add(editTextLote.getText().toString())
+//                arrayStrings.add(etDateCad.getText().toString())
+//                arrayStrings.add(etRemision.text.toString())
+//                arrayStrings.add(valorSpinnerProcedencia)
+                rvListaMeds.setHasFixedSize(true)
+                var mAdapter = MyAdapter(this,arrayStrings)
                 rvListaMeds.setAdapter(mAdapter)
+                //Log.i(TAG,"rvListaMeds.getChildItemId(0).toString(): ${rvListaMeds.getChildAdapterPosition(rvListaMeds)}")
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 mAdapter.notifyItemInserted(rvListaMeds.size)
             }
@@ -202,7 +199,6 @@ class MainActivity : AppCompatActivity(){
             }
 
             buttonSearch.setOnClickListener {
-                Log.i(TAG, "ENTRA A SET ON CLICKLISTENER")
                 val searchMedicineListActivity = Intent(this, SearchMedicineList::class.java)
                 startActivity(searchMedicineListActivity) //cambia de actividad
             }
@@ -254,36 +250,26 @@ class MainActivity : AppCompatActivity(){
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        Log.i(TAG,"OnRestoreInstanceState() llamado: ")
         editTextLote.setText(savedInstanceState.getString(TEXT_LOTE))
-        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.i(TAG,"OnSaveInstanceState(): Llamado")
         outState.putString(TEXT_LOTE,editTextLote.getText().toString())
-        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i(TAG,"OnResume(): Llamado")
         editTextLote.setText(TEXT_LOTE)
-        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.i(TAG, "OnRestart(): llamado")
-        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.i(TAG, "OnPause(): llamado")
         TEXT_LOTE = editTextLote.getText().toString()
-        Log.i(TAG, "valor TEXT_LOTE: ${TEXT_LOTE}")
     }
 
 
@@ -299,13 +285,15 @@ class MainActivity : AppCompatActivity(){
             e.printStackTrace()
         }
     }
-
+    //*************************************************************************************************************************************************************************
+    //************************************************************************** DEFINICION DEL VALE **************************************************************************
+    //*************************************************************************************************************************************************************************
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun generarPDF(){
         //Enlace de interés: https://stackoverflow.com/questions/27941522/how-to-set-pdf-file-size-using-pdfdocument-on-android
         //Crea un nuevo documento
         //TODO: Enlace de interés (Ejemplos) https://www.tabnine.com/code/java/classes/com.itextpdf.text.pdf.PdfDocument | https://developer.android.com/reference/android/graphics/pdf/PdfDocument | https://www.programcreek.com/java-api-examples/?api=android.graphics.pdf.PdfDocument
-        var aPdfDocument: PdfDocument = PdfDocument()
+        var aPdfDocument = PdfDocument()
         val aPageInfo : PdfDocument.PageInfo = PdfDocument.PageInfo.Builder(612,792,1).create()
 
         //Empieza una pagina
@@ -329,8 +317,9 @@ class MainActivity : AppCompatActivity(){
         while(i <= recyclerViewLista.getChildCount()){
 //            child = recyclerViewLista.getChildAt(i)
             //Log.i(TAG,"Child at ${i}: ${child}")
-            hijo = hijo + recyclerViewLista.adapter!!.getItemId(i) + "\n"
+            //hijo = hijo + recyclerViewLista.getChildAdapterPosition(recyclerViewLista) + "\n"
             i++
+            //Log.i(TAG, "i: ${i}, hijo: ${hijo}")
         }
         aCanvas.drawText(hijo,70f, 125f,paintTexto)
 

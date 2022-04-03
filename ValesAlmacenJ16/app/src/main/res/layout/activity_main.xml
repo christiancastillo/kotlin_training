@@ -25,7 +25,7 @@
             android:minHeight="48dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textViewFolio"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.0"  
             app:layout_constraintStart_toEndOf="@+id/textViewFolio" />
 
         <TextView
@@ -160,7 +160,8 @@
             android:layout_marginEnd="16dp"
             android:drawableLeft="@android:drawable/ic_menu_search"
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextClave"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="buscar"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -390,62 +391,74 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:textAlignment="center"
+            android:layout_marginEnd="16dp"
             android:scrollbars="horizontal"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/table_layout_rows" />
 
         <TableLayout
             android:id="@+id/table_layout_rows"
-            android:layout_width="744dp"
-            android:layout_height="43dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerProcedencia">
-            <TableRow android:layout_width="530dp">
+            app:layout_constraintTop_toBottomOf="@+id/spinnerProcedencia"
+            android:scrollbars="horizontal">
+            <TableRow
+                android:layout_width="530dp">
 
                 <TextView
                     android:id="@+id/textViewClaveLista"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:text="Clave" />
 
                 <TextView
                     android:id="@+id/textViewDescLista"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:text="Descripcion" />
 
                 <TextView
                     android:id="@+id/textPresentacionLista"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:text="Presentación" />
 
                 <TextView
                     android:id="@+id/textViewCantidadLista"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:text="Cantidad" />
 
                 <TextView
                     android:id="@+id/textViewLoteLista"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:text="Lote" />
 
                 <TextView
                     android:id="@+id/textViewFCaducidadLista"
                     android:layout_width="97dp"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:text="Caducidad" />
                 <TextView
                     android:id="@+id/textViewRemisionVale"
                     android:text="Remision o vale"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:layout_width="130dp"/>
                 <TextView
                     android:id="@+id/textViewProcedencia"
                     android:text="Procedencia"
                     android:padding="10dp"
+                    android:textStyle="bold"
                     android:layout_width="130dp"/>
             </TableRow>
         </TableLayout>

@@ -12,9 +12,59 @@
         <TableRow>
             <TextView
                 android:padding="10dp"
+                android:layout_width="wrap_content"
                 android:id="@+id/textViewClaveLista"
+                android:textAlignment="center"
+                android:hint="{clave}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewDescripcionLista"
                 android:layout_weight="1"
-                android:text=""/>
+                android:hint="{descripcion}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewPresentacionLista"
+                android:layout_weight="1"
+                android:hint="{presentacion}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewCantidadLista"
+                android:layout_weight="1"
+                android:hint="{cantidad}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewLoteLista"
+                android:layout_weight="1"
+                android:hint="{lote}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewCaducidadLista"
+                android:layout_weight="1"
+                android:hint="{caducidad}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewRemisionLista"
+                android:layout_weight="1"
+                android:hint="{remision}"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/textViewProcLista"
+                android:layout_weight="1"
+                android:hint="{procedencia}"/>
         </TableRow>
     </TableLayout>
 </RelativeLayout>
