@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.training.valesalmacenj16.R
+import com.android.training.valesalmacenj16.classes.ValeMedicamentosModel
 
 internal class MyAdapter (private val context: Context, private val list: ArrayList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -46,15 +47,9 @@ internal class MyAdapter (private val context: Context, private val list: ArrayL
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //(holder as ViewHolder).bind(position)
-        (holder as ViewHolder).textView.text = list[0]
-        (holder as ViewHolder).tvPresentacionLista.setText(list[1])
-        /*(holder as ViewHolder).tvDescripcionLista.setText(list[2])
-        (holder as ViewHolder).tvCantidadLista.setText(list[3])
-        (holder as ViewHolder).tvLoteLista.setText(list[4])
-        (holder as ViewHolder).tvCaducidadLista.setText(list[5])
-        (holder as ViewHolder).tvRemisionLista.setText(list[6])
-        (holder as ViewHolder).tvProcedenciaLista.setText(list[7])*/
+        (holder as ViewHolder).bind(position)
+        val valeMedicamentosModel = ValeMedicamentosModel()
+        holder.tvClaveLista.text = valeMedicamentosModel.getClaveLista()
         //(holder as ViewHolder).tvPresentacionLista.setText(position)
     }
 

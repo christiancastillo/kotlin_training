@@ -35,10 +35,12 @@ import com.android.training.valesalmacenj16.classes.MyAdapter
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URI
+import com.android.training.valesalmacenj16.classes.ValeMedicamentosModel
 
 private const val TAG : String = "MainActivity"
 
 class MainActivity : AppCompatActivity(){
+    val modeloVale = ValeMedicamentosModel()
     //DEFINICION DE TEXTS
     var procedenciaSpin = ""
     private var TEXT_LOTE: String = ""
@@ -72,7 +74,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var etRemision : EditText
 
     var REQUEST_CODE = 200;
-    var arrayStrings : ArrayList<String> = ArrayList<String>()
+    var arrayStrings : ArrayList<String> = ArrayList<String>(10)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -118,6 +120,7 @@ class MainActivity : AppCompatActivity(){
             etPresentacionMed = findViewById(R.id.editTextPresentacion)
             etClaveMed = findViewById(R.id.editTextClave)
             etDescripcionMed = findViewById(R.id.editTextDescripcion)
+
             rvListaMeds = findViewById(R.id.recyclerview_medicamentos_lista)
             etRemision = findViewById(R.id.edRemision)
 
@@ -155,10 +158,6 @@ class MainActivity : AppCompatActivity(){
                     }
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
                         Log.i(TAG,"PERMISO DENEGADO")
-                        // In an educational UI, explain to the user why your app requires this
-//                        // permission for a specific feature to behave as expected. In this UI,
-//                        // include a "cancel" or "no thanks" button that allows the user to
-//                        // continue using your app without granting the permission. }
                         //Toast.makeText(this,"Es necesario permitir escritura en la app para generar el reporte.",Toast.LENGTH_SHORT).show()
                         val permisos: Array<String> = arrayOf("")
                         permisos[0] = Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -170,27 +169,32 @@ class MainActivity : AppCompatActivity(){
                     }
                     else -> {
                         Log.i(TAG,"PERMISO DENEGADO?")
-                        //verificarPermision()
-//                        // You can directly ask for the permission.
-//                        // The registered ActivityResultCallback gets the result of this request.
-                        //requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     }
                 }
-                var valorSpinnerProcedencia = spinProc.getSelectedItem().toString()
+                val valorSpinnerProcedencia = spinProc.getSelectedItem().toString()
                 //arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etDateCad.getText()}  ${valorSpinnerProcedencia}")
-                arrayStrings.add(etClaveMed.getText().toString())
-                arrayStrings.add(etPresentacionMed.getText().toString())
-//                arrayStrings.add(etDescripcionMed.getText().toString())
-//                arrayStrings.add(etCantidad.getText().toString())
-//                arrayStrings.add(editTextLote.getText().toString())
-//                arrayStrings.add(etDateCad.getText().toString())
-//                arrayStrings.add(etRemision.text.toString())
-//                arrayStrings.add(valorSpinnerProcedencia)
+                modeloVale.setClaveLista(etClaveMed.getText().toString())
+                modeloVale.setDescripcionLista(etDescripcionMed.getText().toString())
+                modeloVale.setCantidadLista(etCantidad.getText().toString())
+                modeloVale.setLoteLista(editTextLote.getText().toString())
+                modeloVale.setFechaCad(etDateCad.getText().toString())
+                modeloVale.setRemision(etRemision.text.toString())
+                modeloVale.setProcedencia(valorSpinnerProcedencia)
+
+
+                arrayStrings.add(modeloVale.getClaveLista())
+                arrayStrings.add(modeloVale.getDescripcionLista())
+                arrayStrings.add(modeloVale.getCantidadLista())
+                arrayStrings.add(modeloVale.getLoteLista())
+                arrayStrings.add(modeloVale.getFechaCad())
+                arrayStrings.add(modeloVale.getRemision())
+                arrayStrings.add(modeloVale.getProcedencia())
+
                 rvListaMeds.setHasFixedSize(true)
-                var mAdapter = MyAdapter(this,arrayStrings)
-                rvListaMeds.setAdapter(mAdapter)
+                val mAdapter = MyAdapter(this,arrayStrings)
                 //Log.i(TAG,"rvListaMeds.getChildItemId(0).toString(): ${rvListaMeds.getChildAdapterPosition(rvListaMeds)}")
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
+                rvListaMeds.setAdapter(mAdapter)
                 mAdapter.notifyItemInserted(rvListaMeds.size)
             }
 
