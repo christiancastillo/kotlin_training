@@ -46,7 +46,7 @@ internal class MyAdapter (private val context: Context, private val list: ArrayL
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.row_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
         (holder as ViewHolder).bind(position)
         val valeMedicamentosModel = ValeMedicamentosModel()
         holder.tvClaveLista.text = valeMedicamentosModel.getClaveLista()
