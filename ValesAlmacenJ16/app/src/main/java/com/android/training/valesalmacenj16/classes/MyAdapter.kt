@@ -1,4 +1,4 @@
-package com.android.training.valesalmacenj16.classes
+    package com.android.training.valesalmacenj16.classes
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.training.valesalmacenj16.R
 import com.android.training.valesalmacenj16.classes.ValeMedicamentosModel
 
-internal class MyAdapter (private val context: Context, private val list: ArrayList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyAdapter (private val context: Context, private val list: ArrayList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+
     private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvClaveLista : TextView
         var tvPresentacionLista : TextView
@@ -19,6 +20,7 @@ internal class MyAdapter (private val context: Context, private val list: ArrayL
         var tvRemisionLista : TextView
         var tvProcedenciaLista : TextView
         var tvLoteLista : TextView
+        val valeMedicamentosModel : ValeMedicamentosModel
 
         var textView : TextView
 
@@ -31,6 +33,7 @@ internal class MyAdapter (private val context: Context, private val list: ArrayL
             tvCaducidadLista = itemView.findViewById(R.id.textViewCaducidadLista)
             tvRemisionLista = itemView.findViewById(R.id.textViewRemisionLista)
             tvProcedenciaLista = itemView.findViewById(R.id.textViewProcLista)
+            valeMedicamentosModel = ValeMedicamentosModel()
 
             textView = itemView.findViewById(R.id.textViewClaveLista) // Initialize your All views prensent in list items
         }
@@ -38,7 +41,24 @@ internal class MyAdapter (private val context: Context, private val list: ArrayL
         fun bind(position: Int) {
             // This method will be called anytime a list item is created or update its data
             //Do your stuff here
-            //textView.text = list.get(position)
+            /*
+            tvClaveLista.setText(valeMedicamentosModel.getClaveLista())
+            tvPresentacionLista.setText(list[position])
+            tvDescripcionLista.setText(list[position])
+            tvCantidadLista.setText(list[position])
+            tvLoteLista.setText(list[position])
+            tvCaducidadLista.setText(list[position])
+            tvRemisionLista.setText(valeMedicamentosModel.getRemision())
+            tvProcedenciaLista.setText(list[position])
+             */
+            tvClaveLista.setText(valeMedicamentosModel.getClaveLista())
+            tvPresentacionLista.setText(valeMedicamentosModel.getPresentacionLista())
+            tvDescripcionLista.setText(valeMedicamentosModel.getDescripcionLista())
+            tvCantidadLista.setText(valeMedicamentosModel.getCantidadLista())
+            tvLoteLista.setText(valeMedicamentosModel.getLoteLista())
+            tvCaducidadLista.setText(valeMedicamentosModel.getFechaCad())
+            tvRemisionLista.setText(valeMedicamentosModel.getRemision())
+            tvProcedenciaLista.setText(valeMedicamentosModel.getProcedencia())
         }
     }
 
@@ -46,10 +66,8 @@ internal class MyAdapter (private val context: Context, private val list: ArrayL
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.row_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).bind(position)
-        val valeMedicamentosModel = ValeMedicamentosModel()
-        holder.tvClaveLista.text = valeMedicamentosModel.getClaveLista()
         //(holder as ViewHolder).tvPresentacionLista.setText(position)
     }
 

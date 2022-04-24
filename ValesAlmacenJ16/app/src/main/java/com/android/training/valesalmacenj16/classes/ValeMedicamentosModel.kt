@@ -2,14 +2,14 @@ package com.android.training.valesalmacenj16.classes
 
 class ValeMedicamentosModel {
 
-    lateinit var ClaveListaModel : String
-    lateinit var PresentacionListaModel : String
-    lateinit var DescripcionListaModel : String
-    lateinit var CantidadListaModel : String
-    lateinit var LoteListaModel : String
-    lateinit var FechaCaducidadModel : String
-    lateinit var RemisionListaModel : String
-    lateinit var ProcedenciaListaModel : String
+    var ClaveListaModel : String = ""
+    var PresentacionListaModel : String = ""
+    var DescripcionListaModel : String = ""
+    var CantidadListaModel : String = ""
+    var LoteListaModel : String = ""
+    var FechaCaducidadModel : String = ""
+    var RemisionListaModel : String = ""
+    var ProcedenciaListaModel : String = ""
 
 
     fun setClaveLista(valor:String){ ClaveListaModel = valor }

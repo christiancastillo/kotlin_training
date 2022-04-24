@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var etRemision : EditText
 
     var REQUEST_CODE = 200;
-    var arrayStrings : ArrayList<String> = ArrayList<String>(10)
+    val arrayStrings =arrayListOf<String>()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity(){
                 //Log.i(TAG,"rvListaMeds.getChildItemId(0).toString(): ${rvListaMeds.getChildAdapterPosition(rvListaMeds)}")
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 rvListaMeds.setAdapter(mAdapter)
-                mAdapter.notifyItemInserted(rvListaMeds.size)
+                //mAdapter.notifyItemInserted(rvListaMeds.size)
             }
 
             btnVerReporte.setOnClickListener {
