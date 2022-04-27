@@ -20,7 +20,6 @@ class MyAdapter (private val context: Context, private val list: ArrayList<Strin
         var tvRemisionLista : TextView
         var tvProcedenciaLista : TextView
         var tvLoteLista : TextView
-        val valeMedicamentosModel : ValeMedicamentosModel
 
         var textView : TextView
 
@@ -33,7 +32,7 @@ class MyAdapter (private val context: Context, private val list: ArrayList<Strin
             tvCaducidadLista = itemView.findViewById(R.id.textViewCaducidadLista)
             tvRemisionLista = itemView.findViewById(R.id.textViewRemisionLista)
             tvProcedenciaLista = itemView.findViewById(R.id.textViewProcLista)
-            valeMedicamentosModel = ValeMedicamentosModel()
+            //valeMedicamentosModel = ValeMedicamentosModel()
 
             textView = itemView.findViewById(R.id.textViewClaveLista) // Initialize your All views prensent in list items
         }
@@ -41,24 +40,24 @@ class MyAdapter (private val context: Context, private val list: ArrayList<Strin
         fun bind(position: Int) {
             // This method will be called anytime a list item is created or update its data
             //Do your stuff here
-            /*
-            tvClaveLista.setText(valeMedicamentosModel.getClaveLista())
+
+            tvClaveLista.setText(list[position])
             tvPresentacionLista.setText(list[position])
             tvDescripcionLista.setText(list[position])
             tvCantidadLista.setText(list[position])
             tvLoteLista.setText(list[position])
             tvCaducidadLista.setText(list[position])
-            tvRemisionLista.setText(valeMedicamentosModel.getRemision())
+            tvRemisionLista.setText(list[position])
             tvProcedenciaLista.setText(list[position])
-             */
-            tvClaveLista.setText(valeMedicamentosModel.getClaveLista())
+
+            /*tvClaveLista.setText(valeMedicamentosModel.getClaveLista())
             tvPresentacionLista.setText(valeMedicamentosModel.getPresentacionLista())
             tvDescripcionLista.setText(valeMedicamentosModel.getDescripcionLista())
             tvCantidadLista.setText(valeMedicamentosModel.getCantidadLista())
             tvLoteLista.setText(valeMedicamentosModel.getLoteLista())
             tvCaducidadLista.setText(valeMedicamentosModel.getFechaCad())
             tvRemisionLista.setText(valeMedicamentosModel.getRemision())
-            tvProcedenciaLista.setText(valeMedicamentosModel.getProcedencia())
+            tvProcedenciaLista.setText(valeMedicamentosModel.getProcedencia())*/
         }
     }
 

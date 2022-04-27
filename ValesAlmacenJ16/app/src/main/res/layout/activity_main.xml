@@ -411,52 +411,52 @@
             app:layout_constraintTop_toBottomOf="@+id/spinnerProcedencia"
             android:scrollbars="horizontal">
             <TableRow
-                android:layout_width="530dp">
+                android:layout_width="match_parent">
 
                 <TextView
-                    android:id="@+id/textViewClaveLista"
+                    android:id="@+id/textViewClaveHeader"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:text="Clave" />
 
                 <TextView
-                    android:id="@+id/textViewDescLista"
+                    android:id="@+id/textViewDescHeader"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:text="Descripcion" />
 
                 <TextView
-                    android:id="@+id/textPresentacionLista"
+                    android:id="@+id/textPresentacionHeader"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:text="Presentación" />
 
                 <TextView
-                    android:id="@+id/textViewCantidadLista"
+                    android:id="@+id/textViewCantidadHeader"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:text="Cantidad" />
 
                 <TextView
-                    android:id="@+id/textViewLoteLista"
+                    android:id="@+id/textViewLoteHeader"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:text="Lote" />
 
                 <TextView
-                    android:id="@+id/textViewFCaducidadLista"
+                    android:id="@+id/textViewFCaducidadHeader"
                     android:layout_width="97dp"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:text="Caducidad" />
                 <TextView
-                    android:id="@+id/textViewRemisionVale"
+                    android:id="@+id/textViewRemisionValeHeader"
                     android:text="Remision o vale"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:layout_width="130dp"/>
                 <TextView
-                    android:id="@+id/textViewProcedencia"
+                    android:id="@+id/textViewProcedenciaHeader"
                     android:text="Procedencia"
                     android:padding="10dp"
                     android:textStyle="bold"

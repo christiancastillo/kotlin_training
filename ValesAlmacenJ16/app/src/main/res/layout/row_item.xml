@@ -14,31 +14,35 @@
                 android:id="@+id/textViewClaveLista"
                 android:padding="10dp"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:textAlignment="center"
                 />
             <TextView
                 android:id="@+id/textViewDescripcionLista"
-                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
                 android:layout_weight="1"
+                android:textAlignment="center"
                 />
             <TextView
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:padding="10dp"
                 android:id="@+id/textViewPresentacionLista"
-                android:layout_weight="1"
-                />
-            <TextView
                 android:textAlignment="center"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
+                android:layout_weight="1"
+                />
+            <TextView
                 android:id="@+id/textViewCantidadLista"
+                android:textAlignment="center"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
                 android:layout_weight="1"
                 />
             <TextView
                 android:textAlignment="center"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
                 android:id="@+id/textViewLoteLista"
@@ -46,6 +50,7 @@
                 />
             <TextView
                 android:textAlignment="center"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
                 android:id="@+id/textViewCaducidadLista"
@@ -53,6 +58,7 @@
                 />
             <TextView
                 android:textAlignment="center"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
                 android:id="@+id/textViewRemisionLista"
@@ -60,6 +66,7 @@
                 />
             <TextView
                 android:textAlignment="center"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
                 android:id="@+id/textViewProcLista"

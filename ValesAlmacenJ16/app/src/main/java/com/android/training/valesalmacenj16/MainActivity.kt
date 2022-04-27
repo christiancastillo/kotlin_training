@@ -11,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.Build
@@ -36,6 +37,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.net.URI
 import com.android.training.valesalmacenj16.classes.ValeMedicamentosModel
+import com.android.training.valesalmacenj16.classes.ValeMedicamentosAdapter
 
 private const val TAG : String = "MainActivity"
 
@@ -74,7 +76,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var etRemision : EditText
 
     var REQUEST_CODE = 200;
-    val arrayStrings =arrayListOf<String>()
+    val arrayValeMedicamentos : ArrayList<ValeMedicamentosModel> = arrayListOf<ValeMedicamentosModel>()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -82,6 +84,29 @@ class MainActivity : AppCompatActivity(){
             if (resultCode == RESULT_OK){
             }
         }
+    }
+
+    fun agregarElemento(modelo : ValeMedicamentosModel, arr : ArrayList<ValeMedicamentosModel>, spinnerProcedencia : String){
+        // agregarElemento(modeloVale, arrayValeMedicamentos)
+        /*modeloVale.setClaveLista(etClaveMed.getText().toString())
+                modeloVale.setDescripcionLista(etDescripcionMed.getText().toString())
+                modeloVale.setCantidadLista(etCantidad.getText().toString())
+                modeloVale.setLoteLista(editTextLote.getText().toString())
+                modeloVale.setFechaCad(etDateCad.getText().toString())
+                modeloVale.setRemision(etRemision.text.toString())
+                modeloVale.setProcedencia(valorSpinnerProcedencia)
+                arrayValeMedicamentos.add(modeloVale)
+        *
+        * */
+
+        modelo.setDescripcionLista(etDescripcionMed.getText().toString())
+        modelo.setDescripcionLista(etDescripcionMed.getText().toString())
+        modelo.setCantidadLista(etCantidad.getText().toString())
+        modelo.setLoteLista(editTextLote.getText().toString())
+        modelo.setFechaCad(etDateCad.getText().toString())
+        modelo.setRemision(etRemision.text.toString())
+        modelo.setProcedencia(spinnerProcedencia)
+        arr.add(modelo)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -109,7 +134,7 @@ class MainActivity : AppCompatActivity(){
             presentacionMedInstance = intent.getStringExtra("presentacion")
             descripcionMedInstance = intent.getStringExtra("descripcion")
 
-            buttonSearch = findViewById(R.id.buttonSearch)
+            buttonSearch = findViewById(R.id.buttonSearch) as Button
             editTextDateFSalida = findViewById(R.id.editTextDateFechaSalida)
             checkNoCaduca = findViewById(R.id.checkBoxSincad)
             checkSinLote = findViewById(R.id.checkBoxLote)
@@ -172,30 +197,21 @@ class MainActivity : AppCompatActivity(){
                     }
                 }
                 val valorSpinnerProcedencia = spinProc.getSelectedItem().toString()
-                //arrayStrings.add("[${arrayStrings.size+1}] ${etClaveMed.getText()}    ${etDescripcionMed.getText()}    ${etPresentacionMed.getText()}    ${etCantidad.getText()}    ${editTextLote.getText()}    ${etDateCad.getText()}  ${valorSpinnerProcedencia}")
-                modeloVale.setClaveLista(etClaveMed.getText().toString())
+
+                agregarElemento(modeloVale, arrayValeMedicamentos,valorSpinnerProcedencia)
+                /*modeloVale.setClaveLista(etClaveMed.getText().toString())
                 modeloVale.setDescripcionLista(etDescripcionMed.getText().toString())
                 modeloVale.setCantidadLista(etCantidad.getText().toString())
                 modeloVale.setLoteLista(editTextLote.getText().toString())
                 modeloVale.setFechaCad(etDateCad.getText().toString())
                 modeloVale.setRemision(etRemision.text.toString())
                 modeloVale.setProcedencia(valorSpinnerProcedencia)
-
-
-                arrayStrings.add(modeloVale.getClaveLista())
-                arrayStrings.add(modeloVale.getDescripcionLista())
-                arrayStrings.add(modeloVale.getCantidadLista())
-                arrayStrings.add(modeloVale.getLoteLista())
-                arrayStrings.add(modeloVale.getFechaCad())
-                arrayStrings.add(modeloVale.getRemision())
-                arrayStrings.add(modeloVale.getProcedencia())
-
+                arrayValeMedicamentos.add(modeloVale)*/
+                val mAdapter = ValeMedicamentosAdapter(this,arrayValeMedicamentos)
                 rvListaMeds.setHasFixedSize(true)
-                val mAdapter = MyAdapter(this,arrayStrings)
-                //Log.i(TAG,"rvListaMeds.getChildItemId(0).toString(): ${rvListaMeds.getChildAdapterPosition(rvListaMeds)}")
                 rvListaMeds.setLayoutManager(LinearLayoutManager(this))
                 rvListaMeds.setAdapter(mAdapter)
-                //mAdapter.notifyItemInserted(rvListaMeds.size)
+                mAdapter.notifyItemInserted(rvListaMeds.size)
             }
 
             btnVerReporte.setOnClickListener {
