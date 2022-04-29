@@ -87,17 +87,6 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun agregarElemento(modelo : ValeMedicamentosModel, arr : ArrayList<ValeMedicamentosModel>, spinnerProcedencia : String){
-        // agregarElemento(modeloVale, arrayValeMedicamentos)
-        /*modeloVale.setClaveLista(etClaveMed.getText().toString())
-                modeloVale.setDescripcionLista(etDescripcionMed.getText().toString())
-                modeloVale.setCantidadLista(etCantidad.getText().toString())
-                modeloVale.setLoteLista(editTextLote.getText().toString())
-                modeloVale.setFechaCad(etDateCad.getText().toString())
-                modeloVale.setRemision(etRemision.text.toString())
-                modeloVale.setProcedencia(valorSpinnerProcedencia)
-                arrayValeMedicamentos.add(modeloVale)
-        *
-        * */
 
         modelo.setDescripcionLista(etDescripcionMed.getText().toString())
         modelo.setDescripcionLista(etDescripcionMed.getText().toString())
